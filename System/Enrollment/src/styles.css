@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+/* Apply a full-screen layout for the body */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    height: 100vh; /* Takes full viewport height */
+    text-align: center; /* Ensures text inside elements is centered */
+    background-color: #f4f4f4; /* Optional background color */
+  }
+  
+  /* Optional: Style the root component */
+  app-root {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+  
