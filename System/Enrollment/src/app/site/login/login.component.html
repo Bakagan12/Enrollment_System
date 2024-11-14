@@ -1,27 +1,41 @@
-<div class="container">
-  <div class="login-container">
-    <h2>Login</h2>
-    <form>
-      <label for="username">Username</label>
-      <input type="text" id="username" required>
-  
-      <label for="password">Password</label>
-      <input type="password" id="password" required>
-  
-      <button type="submit">Login</button>
-    </form>
-  </div>
-  <div class="login-container">
-    <h2>Login</h2>
-    <form>
-      <label for="username">Username</label>
-      <input type="text" id="username" required>
-  
-      <label for="password">Password</label>
-      <input type="password" id="password" required>
-  
-      <button type="submit">Login</button>
-    </form>
-  </div>
+<div class="login-container">
+  <h2>Login</h2>
 
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <div>
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        [(ngModel)]="username"
+        name="username"
+        required
+        #usernameField="ngModel"
+        class="form-control"
+      />
+      <div *ngIf="usernameField.invalid && usernameField.touched" class="error-message">
+        Username is required.
+      </div>
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        #passwordField="ngModel"
+        class="form-control"
+      />
+      <div *ngIf="passwordField.invalid && passwordField.touched" class="error-message">
+        Password is required.
+      </div>
+    </div>
+
+    <button type="submit" id="login-btn" [disabled]="loginForm.invalid">Login</button>
+  </form>
+
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
 </div>

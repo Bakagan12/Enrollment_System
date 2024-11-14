@@ -54,4 +54,8 @@ body {
     display: flex;
     justify-content: space-between;
   }
+  .loginForm{
+    display: flex;
+    justify-content: space-between;
+  }
   
