@@ -1,52 +1,35 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const mysql = require('mysql2');
+const db = require('../../config/db');
 
-// MySQL database connection (use your own database credentials)
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',  
-  password: '', 
-  database: 'sta_cruz' 
-});
+// Login Function
+const login = async (req, res) => {
+  const { username, password } = req.body;
 
-// Function to authenticate user
-const authenticateUser = (username, password, callback) => {
-  const query = 'SELECT * FROM users WHERE username = ?';
-  
-  db.query(query, [username], (err, results) => {
-    if (err) {
-      console.error('Database query error: ', err);
-      return callback(err, null);
+  try {
+    // Check if user exists
+    const [rows] = await db.execute('SELECT * FROM users WHERE username = ?', [username]);
+
+    if (rows.length === 0) {
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    if (results.length === 0) {
-      return callback(null, { message: 'Invalid credentials' });
+    const user = rows[0];
+
+    // Check password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const user = results[0];
+    // Create JWT Token
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    // Compare the password with the stored hashed password
-    bcrypt.compare(password, user.password, (err, isMatch) => {
-      if (err) {
-        console.error('Error comparing password: ', err);
-        return callback(err, null);
-      }
-
-      if (!isMatch) {
-        return callback(null, { message: 'Invalid credentials' });
-      }
-
-      // Generate a JWT token if authentication is successful
-      const token = jwt.sign(
-        { userId: user.id, username: user.username },
-        'your_jwt_secret',  // use a strong secret key
-        { expiresIn: '1h' }
-      );
-
-      return callback(null, { message: 'Login successful', token });
-    });
-  });
+    res.json({ message: 'Login successful', token });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
 };
 
-module.exports = { authenticateUser };
+module.exports = { login };
