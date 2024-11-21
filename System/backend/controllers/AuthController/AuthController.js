@@ -1,35 +1,34 @@
+const {validationResult} = require('express-validator');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const db = require('../../config/db');
+const GenUser = require('../../models/genUser');
 
-// Login Function
-const login = async (req, res) => {
-  const { username, password } = req.body;
+exports.signup = async (req, res, next) => {
+  const errors = validationResult(req);
+  
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
+  const username = req.body.username;
+  const email = req.body.email;
+  const password = req.body.password;
 
   try {
-    // Check if user exists
-    const [rows] = await db.execute('SELECT * FROM users WHERE username = ?', [username]);
+    const hashedPassword = await bcrypt.hash(password, 15);
 
-    if (rows.length === 0) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+    const GenUserDetails = {
+      username: username,
+      email: email,
+      password: hashedPassword
     }
 
-    const user = rows[0];
+    const result = await GenUser.save(GenUserDetails);
 
-    // Check password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    // Create JWT Token
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-    res.json({ message: 'Login successful', token });
+    res.status(201).json({ message: 'User Registered!' });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
   }
 };
-
-module.exports = { login };
