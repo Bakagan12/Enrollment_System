@@ -1,14 +1,16 @@
+// backend/server.js
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth/authRoutes');
 const errorController = require('./controllers/error/error');
-
-// Import the testDbConnection function from the database module
-const { testDbConnection } = require('./util/database'); // Import testDbConnection
+const authenticateJWT = require('./middleware/AuthMiddleware').authenticateJWT;
+const { testDbConnection } = require('./util/database'); 
 require('dotenv').config();
 
 const app = express();
 
+// Middleware to parse JSON requests
 app.use(bodyParser.json());
 
 // CORS middleware
@@ -21,27 +23,38 @@ app.use((req, res, next) => {
 
 // Test the database connection when the server starts
 async function initializeServer() {
-    await testDbConnection(); // Test the DB connection
+    try {
+        // Test DB connection
+        await testDbConnection();
+        
+        const port = process.env.PORT || 3000;
 
-    const port = process.env.PORT || 3000;
+        // Define the routes
+        app.use('/auth', authRoutes);
 
-    // Routes
-    app.use('/auth', authRoutes);
+        // Protect a route with JWT authentication
+        app.get('/profile', authenticateJWT, (req, res) => {
+            res.json({ message: 'This is a protected route', user: req.user });
+        });
 
-    // Error handling middleware
-    app.use(errorController.get404);
-    app.use(errorController.get500);
+        // Error handling middleware
+        app.use(errorController.get404);
+        app.use(errorController.get500);
 
-    // Basic route
-    app.get('/', (req, res) => {
-        res.send('Hello World');
-    });
+        // Basic route
+        app.get('/', (req, res) => {
+            res.send('Hello World');
+        });
 
-    // Start the server
-    app.listen(port, () => {
-        console.log(`Listening on port ${port}`);
-    });
+        // Start the server
+        app.listen(port, () => {
+            console.log(`Listening on port ${port}`);
+        });
+    } catch (error) {
+        console.error('Error initializing server:', error.message);
+        process.exit(1);  // Exit the process with an error code
+    }
 }
 
-// Initialize the server and test the database connection
+// Initialize the server
 initializeServer();

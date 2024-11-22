@@ -1,23 +1,18 @@
+// backend/routes/auth/authRoutes.js
+
 const express = require('express');
-
-const {body} = require('express-validator');
-
 const router = express.Router();
 
-const GenUser = require('../../models/genUser');
-
 const authController = require('../../controllers/AuthController/AuthController');
+const { signupValidation, loginValidation } = require('../../validator/userValidation');
 
-router.post('/signup', [
-    body('username').trim().not().isEmpty(),
-    body('email').isEmail().withMessage('Please enter a valid email.').custom(async (email) => {
-        const user = await GenUser.find(email);
-        if(user[0].length > 0){
-            return Promise.reject('Email address already exist!')
-        }
-    }).normalizeEmail(),
-    body('password').trim().isLength({min: 7}),
-], authController.signup);
+// Sign up route
+router.post('/signup', signupValidation, authController.signup);
 
+// Login route
+router.post('/login', loginValidation, authController.login);
+
+// Logout route (client handles the actual token deletion)
+router.post('/logout', authController.logout);
 
 module.exports = router;
