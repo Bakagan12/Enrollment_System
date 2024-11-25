@@ -1,34 +1,33 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
+  imports: [FormsModule, CommonModule],  // Import FormsModule and CommonModule
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  // username: string = '';
-  // password: string = '';
-  // errorMessage: string | null = null;
+  // constructor(private authService: AuthService, private router: Router) {}
+  login() {
+    // this.authService.login(this.username, this.password).subscribe(
+    //   (response) => {
+    //     console.log('Login successful:', response);
+    //     // Redirect to dashboard or home page
+    //     this.router.navigate(['/dashboard']);  // Change '/dashboard' to your desired route
+    //   },
+    //   (error) => {
+    //     console.error('Login error:', error);
+    //     this.errorMessage = 'Invalid username or password';  // Show error message
+    //   }
+    // );
+  }
 
-  // private loginApiUrl = 'http://localhost:3000/api/login';  // Node.js backend URL
-
-  // constructor(private http: HttpClient, private router: Router) {}
-
-  // onSubmit(): void {
-  //   const credentials = {
-  //     username: this.username,
-  //     password: this.password
-  //   };
-
-  //   this.http.post<{ message: string }>(this.loginApiUrl, credentials).subscribe(
-  //     (response) => {
-  //       this.router.navigate(['/dashboard']);  // Navigate to dashboard or home page
-  //     },
-  //     (error) => {
-  //       this.errorMessage = 'Invalid credentials. Please try again.';
-  //     }
-  //   );
-  // }
+  username = '';
+  password = '';
+  errorMessage: string = '';
 }

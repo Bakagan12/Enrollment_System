@@ -19,7 +19,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
-});
+  });
 
 // Test the database connection when the server starts
 async function initializeServer() {
@@ -32,19 +32,9 @@ async function initializeServer() {
         // Define the routes
         app.use('/auth', authRoutes);
 
-        // Protect a route with JWT authentication
-        app.get('/profile', authenticateJWT, (req, res) => {
-            res.json({ message: 'This is a protected route', user: req.user });
-        });
-
         // Error handling middleware
         app.use(errorController.get404);
         app.use(errorController.get500);
-
-        // Basic route
-        app.get('/', (req, res) => {
-            res.send('Hello World');
-        });
 
         // Start the server
         app.listen(port, () => {

@@ -1,7 +1,7 @@
 <div class="login-container">
   <h2>Login</h2>
 
-  <form>
+  <form (ngSubmit)="login()">
     <div>
       <label for="username">Username</label>
       <input
@@ -9,10 +9,11 @@
         id="username"
         name="username"
         required
+        [(ngModel)]="username"
         class="form-control"
       />
-      <div class="error-message">
-        Username is required.
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
       </div>
     </div>
 
@@ -23,14 +24,14 @@
         id="password"
         name="password"
         required
+        [(ngModel)]="password"
         class="form-control"
       />
-      <div class="error-message">
-        Password is required.
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
       </div>
     </div>
 
     <button type="submit" id="login-btn">Login</button>
   </form>
-
 </div>
