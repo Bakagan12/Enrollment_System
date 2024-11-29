@@ -1,8 +1,38 @@
 <div class="dashboard-container">
-  <h2>Welcome to the Dashboard</h2>
-  <p>Logged in as: {{ username }}</p>
-  <button style="background-color: aqua;" (click)="logout()">Logout</button>
+
 </div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo or title -->
+     <div class="name">
+       <a href="#" class="logo">My Dashboard</a>
+       <p style="color: white;">Logged in as: {{ username }}</p>
+     </div>
+
+    <!-- Burger Menu icon -->
+    <div class="burger-menu" (click)="toggleMenu()">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </div>
+
+    <!-- Navbar links -->
+    <ul class="nav-links" [class.active]="isMenuOpen">
+      <li><a routerLink="/dashboard" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
+      <li><a routerLink="/settings" routerLinkActive="active">Settings</a></li>
+      <li><a routerLink="/reports" routerLinkActive="active">Reports</a></li>
+      <li><a>
+        <button class="logout" (click)="logout()">Logout</button>
+      </a></li>
+    </ul>
+  </div>
+</nav>
+<h2>Welcome to the Dashboard</h2>
+
+<!-- Main content -->
 <div>
   <app-default></app-default>
 </div>

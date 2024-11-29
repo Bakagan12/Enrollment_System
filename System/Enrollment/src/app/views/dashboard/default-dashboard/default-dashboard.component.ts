@@ -12,6 +12,8 @@ import {DefaultComponent} from '../../site/default/default.component'
 })
 export class DefaultDashboardComponent {
   username: string | null = '';
+  isMenuOpen = false;
+
 
   constructor(private router: Router, private authService: AuthService) {
     const token = localStorage.getItem('auth_token');
@@ -21,6 +23,10 @@ export class DefaultDashboardComponent {
     } else {
       this.router.navigate(['/auth/login']);
     }
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
   logout() {

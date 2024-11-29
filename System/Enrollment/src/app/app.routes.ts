@@ -10,5 +10,8 @@ export const routes: Routes = [
   { path: 'auth/login', component: LoginComponent },
   { path: 'dashboard', component: DefaultDashboardComponent, canActivate: [AuthGuard] },
   { path: 'auth/logout', component: DefaultDashboardComponent, pathMatch: 'full',
-    resolve: { logout: AuthService } }
+    resolve: { logout: AuthService } },
+//     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+//   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+//   { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] }
 ];
