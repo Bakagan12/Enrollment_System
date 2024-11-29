@@ -9,13 +9,13 @@ const config = require('../config/config');
 const JWT_SECRET = config.JWT_SECRET || 'your_jwt_secret';
 
 // Create a new user (Sign up)
-exports.createUser = async (username, email, password) => {
+exports.createUser = async (username, password) => {
     try {
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 15);
 
         // Save user in the database
-        const user = { username, email, password: hashedPassword };
+        const user = { username, password: hashedPassword };
         const result = await GenUser.save(user);
 
         return { message: 'User Registered!' };
@@ -25,9 +25,9 @@ exports.createUser = async (username, email, password) => {
 };
 
 // Find a user by email (for login)
-exports.findUserByEmail = async (email) => {
+exports.findUserByUsername = async (username) => {
     try {
-        const result = await GenUser.find(email);
+        const result = await GenUser.find(username);
         return result[0][0]; // Returns the first user if found
     } catch (err) {
         throw new Error('Error finding user: ' + err.message);
@@ -37,7 +37,7 @@ exports.findUserByEmail = async (email) => {
 // Generate JWT token after successful login
 exports.generateToken = (user) => {
     return jwt.sign(
-        { id: user.id, username: user.username, email: user.email },
+        { id: user.id, username: user.username, },
         JWT_SECRET,
         { expiresIn: '1h' } // Token expires in 1 hour
     );

@@ -12,10 +12,10 @@ exports.signup = async (req, res, next) => {
         return res.status(422).json({ errors: errors.array() });
     }
 
-    const { username, email, password } = req.body;
+    const { username, password } = req.body;
 
     try {
-        const result = await userService.createUser(username, email, password);
+        const result = await userService.createUser(username, password);
         res.status(201).json(result);
     } catch (err) {
         if (!err.statusCode) {
@@ -32,19 +32,19 @@ exports.login = async (req, res, next) => {
         return res.status(422).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
     try {
-        const user = await userService.findUserByEmail(email);
+        const user = await userService.findUserByUsername(username);
 
         if (!user) {
-            return res.status(401).json({ message: 'Invalid email or password' });
+            return res.status(401).json({ message: 'Invalid username' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            return res.status(401).json({ message: 'Invalid email or password' });
+            return res.status(401).json({ message: 'Invalid password' });
         }
 
         const token = userService.generateToken(user);
@@ -52,7 +52,7 @@ exports.login = async (req, res, next) => {
         res.json({
             message: 'Login successful',
             token,
-            redirectUrl: '/dashboard' 
+            redirectUrl: '/dashboard'
         });
     } catch (err) {
         if (!err.statusCode) {

@@ -1,21 +1,20 @@
 const db = require('../util/database');
 
 module.exports = class GenUser{
-    constructor(username, email, password) {
+    constructor(username, password) {
         this.username = username;
-        this.email = email;
         this.password = password;
 
     }
 
-    static find(email){
-        return db.execute('SELECT * FROM gen_users WHERE gen_user_email = ?', [email]);
+    static find(username){
+        return db.execute('SELECT * FROM gen_users WHERE username = ?', [username]);
     }
 
     static save(user) {
         return db.execute(
-            'INSERT INTO gen_users (username, gen_user_email, password) VALUES (?, ?, ?)', 
-            [user.username, user.email, user.password]
+            'INSERT INTO gen_users (username, password) VALUES (?, ?)',
+            [user.username, user.password]
         );
     }
     

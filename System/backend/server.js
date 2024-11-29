@@ -26,7 +26,7 @@ async function initializeServer() {
     try {
         // Test DB connection
         await testDbConnection();
-        
+
         const port = process.env.PORT || 3000;
 
         // Define the routes
