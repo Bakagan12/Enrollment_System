@@ -26,4 +26,20 @@ export class AuthService {
       })
     );
   }
+  logout(): void {
+    // Remove token and username from localStorage
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('username');
+
+    // Optionally, if you have a server-side session or need to notify the server, make an API request to log out:
+    // this.http.post(`${this.apiUrl}/auth/logout`, {}).subscribe();
+
+    // Navigate back to the login page
+    this.router.navigate(['/auth/login']);
+  }
+
+  // Optional: Check if the user is logged in by checking if a token exists
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('auth_token');
+  }
 }
