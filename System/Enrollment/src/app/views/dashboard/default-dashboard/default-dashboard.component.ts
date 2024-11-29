@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Import Router to navigate
-import { AuthService } from '../../../auth.service'; // Assuming the AuthService is used for logout
+import { Router } from '@angular/router';
+import { AuthService } from '../../../auth.service';
+import {DefaultComponent} from '../../../site/default/default.component'
 
 @Component({
   selector: 'app-default-dashboard',
   standalone: true,
-  imports: [],
+  imports: [DefaultComponent],
   templateUrl: './default-dashboard.component.html',
   styleUrls: ['./default-dashboard.component.css']
 })

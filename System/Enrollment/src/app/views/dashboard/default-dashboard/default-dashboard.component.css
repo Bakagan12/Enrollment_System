@@ -1,0 +1,30 @@
+/* Center the dashboard container vertically and horizontally */
+.dashboard-container {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center; /* Vertically center the content */
+  align-items: center; /* Horizontally center the content */
+  height: 100vh; /* Full viewport height */
+  position: relative; /* Ensure positioning context */
+}
+
+.dashboard-container h2 {
+  margin: 0; /* Remove default margin */
+  font-size: 2rem; /* Adjust size as needed */
+}
+
+/* Position the p and button at the upper left corner */
+.dashboard-container p,
+.dashboard-container button {
+  position: absolute;
+  top: 10px; /* Distance from the top of the page */
+  left: 10px; /* Distance from the left of the page */
+  margin: 0; /* Remove any default margins */
+}
+
+.dashboard-container button {
+  background-color: aqua;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
