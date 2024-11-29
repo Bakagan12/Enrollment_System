@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth.service';
-import {DefaultComponent} from '../../../site/default/default.component'
+import {DefaultComponent} from '../../site/default/default.component'
 
 @Component({
   selector: 'app-default-dashboard',
