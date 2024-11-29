@@ -8,12 +8,18 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
-    const token = localStorage.getItem('auth_token'); // Get token from local storage
-
-    if (token) {
-      return true;  // Allow access if token is present
+    // Check if window and localStorage are available (i.e., running in the browser)
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const token = localStorage.getItem('auth_token');
+      if (token) {
+        return true; // Token exists, allow navigation
+      } else {
+        this.router.navigate(['/auth/login']);
+        return false; // No token, redirect to login
+      }
     } else {
-      this.router.navigate(['/auth/login']);  // Redirect to login if no token
+      // If running in a non-browser environment (e.g., SSR), deny navigation
+      this.router.navigate(['/auth/login']);
       return false;
     }
   }

@@ -21,6 +21,7 @@ export class AuthService {
       tap((response) => {
         if (response && response.token) {
           localStorage.setItem('auth_token', response.token);  // Save token
+          localStorage.setItem('username', username);
           this.router.navigate(['/dashboard']);  // Redirect to dashboard
         }
       })

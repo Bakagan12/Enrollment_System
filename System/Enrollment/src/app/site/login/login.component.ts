@@ -30,8 +30,9 @@ export class LoginComponent {
     this.authService.login(username, password).subscribe(
       (response) => {
         console.log('Login successful:', response);
-        localStorage.setItem('auth_token', response.token); // Store token in localStorage
-        this.router.navigate(['/dashboard']); // Navigate to dashboard
+        localStorage.setItem('auth_token', response.token);
+        localStorage.setItem('username', username);
+        this.router.navigate(['/dashboard']);
       },
       (error) => {
         // Handle errors from the server
