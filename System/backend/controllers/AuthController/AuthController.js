@@ -51,7 +51,8 @@ exports.login = async (req, res, next) => {
 
         res.json({
             message: 'Login successful',
-            token
+            token,
+            redirectUrl: '/dashboard' 
         });
     } catch (err) {
         if (!err.statusCode) {

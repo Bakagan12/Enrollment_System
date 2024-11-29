@@ -1,33 +1,34 @@
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
-import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule],  // Import FormsModule and CommonModule
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  // constructor(private authService: AuthService, private router: Router) {}
-  login() {
-    // this.authService.login(this.username, this.password).subscribe(
-    //   (response) => {
-    //     console.log('Login successful:', response);
-    //     // Redirect to dashboard or home page
-    //     this.router.navigate(['/dashboard']);  // Change '/dashboard' to your desired route
-    //   },
-    //   (error) => {
-    //     console.error('Login error:', error);
-    //     this.errorMessage = 'Invalid username or password';  // Show error message
-    //   }
-    // );
-  }
-
-  username = '';
-  password = '';
+  username: string = '';
+  password: string = '';
   errorMessage: string = '';
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  login() {
+    this.authService.login(this.username, this.password).subscribe(
+      (response) => {
+        console.log('Login successful:', response);
+        localStorage.setItem('auth_token', response.token);
+        this.router.navigate(['/dashboard']);
+      },
+      (error) => {
+        this.errorMessage = 'Invalid username or password';
+        console.error('Login failed:', error);
+      }
+    );
+  }
 }

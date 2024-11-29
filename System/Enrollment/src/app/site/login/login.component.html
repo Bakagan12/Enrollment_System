@@ -2,6 +2,7 @@
   <h2>Login</h2>
 
   <form (ngSubmit)="login()">
+    <!-- Username Input -->
     <div>
       <label for="username">Username</label>
       <input
@@ -11,12 +12,14 @@
         required
         [(ngModel)]="username"
         class="form-control"
+        (input)="errorMessage = ''"
       />
       <div class="error-message" *ngIf="errorMessage">
-        {{ errorMessage }}
+        {{ errorMessage }} <!-- Display error message if exists -->
       </div>
     </div>
 
+    <!-- Password Input -->
     <div>
       <label for="password">Password</label>
       <input
@@ -26,12 +29,14 @@
         required
         [(ngModel)]="password"
         class="form-control"
+        (input)="errorMessage = ''"
       />
       <div class="error-message" *ngIf="errorMessage">
-        {{ errorMessage }}
+        {{ errorMessage }} <!-- Display error message if exists -->
       </div>
     </div>
 
+    <!-- Login Button -->
     <button type="submit" id="login-btn">Login</button>
   </form>
 </div>
