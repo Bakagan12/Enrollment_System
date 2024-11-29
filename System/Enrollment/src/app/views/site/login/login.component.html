@@ -1,5 +1,5 @@
 <div class="login-container">
-  <h2>Login</h2>
+  <h1>Login</h1>
 
   <!-- Error message shown if there is an error -->
   <div class="error-message" *ngIf="errorMessage">
@@ -9,8 +9,8 @@
   <!-- Reactive Form binding -->
   <form [formGroup]="loginForm" (ngSubmit)="login()">
     <!-- Username Input -->
-    <div>
-      <label for="username">Username</label>
+    <div id="usernameSection">
+      <label for="username">Username</label><br>
       <input
         type="text"
         id="username"
@@ -24,8 +24,8 @@
     </div>
 
     <!-- Password Input -->
-    <div>
-      <label for="password">Password</label>
+    <div id="passwordSection">
+      <label for="password">Password</label><br>
       <input
         type="password"
         id="password"

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './site/login/login.component';
+import { LoginComponent } from './views/site/login/login.component';
 import { DefaultDashboardComponent } from './views/dashboard/default-dashboard/default-dashboard.component';
 import { AuthGuard } from './Guard/auth-guard.guard';
 import { AuthService } from './auth.service';
