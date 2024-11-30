@@ -1,16 +1,75 @@
-/* Navbar container */
+/* Sidebar styling */
+.sidebar {
+  position: fixed;
+  left: -250px;
+  height: 100%;
+  background-color: #1a3c7e;  /* Deep blue background for the sidebar */
+  transition: left 0.3s ease; /* Smooth transition when toggling */
+  padding-top: 20px;
+  z-index: 1000;
+}
+
+.sidebar.active {
+  left: 0; /* Show sidebar when active */
+}
+
+.sidebar-header {
+  color: white;
+  padding: 20px;
+  text-align: center;
+  background-color: #0d276c;  /* Darker blue shade for header */
+}
+
+.sidebar .logo {
+  font-size: 24px;
+  text-decoration: none;
+  color: white;
+}
+
+.username {
+  color: #9db8d8;  /* Lighter blue for the username text */
+  font-size: 14px;
+}
+
+.sidebar-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-links li {
+  margin: 20px 0;
+}
+
+.sidebar-links a {
+  color: #b0c8e0;  /* Light blue for the links */
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  padding: 10px 20px;
+  transition: background-color 0.3s;
+}
+
+.sidebar-links a:hover {
+  background-color: #4569a3; /* Medium blue hover effect */
+}
+
+/* Navbar styles */
 .navbar {
-  background-color: #333;
+  background-color: #2f47a1;  /* Blue navbar */
   padding: 10px;
-  position: sticky;
+  gap:2px 1px;
+  position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
+  z-index: 999;
 }
 
 .navbar-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 4px, 4px;
 }
 
 .logo {
@@ -19,67 +78,89 @@
   text-decoration: none;
 }
 
-.nav-links {
-  list-style-type: none;
-  display: flex;
-  margin: 0;
-}
-
-.nav-links li {
-  margin: 0 15px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-}
-
-/* Burger menu */
+/* Burger menu position at upper-left corner */
+/* Burger menu container */
 .burger-menu {
-  display: none;
+  display: block;
+  top: 25px;
+  background-color: transparent;
+  right: 25px;
   cursor: pointer;
-}
-
-.burger-line {
-  width: 30px;
-  height: 4px;
-  background-color: white;
-  margin: 6px 0;
+  z-index: 500;
   transition: 0.4s;
 }
 
-/* Mobile styles for burger menu */
+/* Each line of the burger menu */
+.burger-line {
+  height: 1px;      /* Height of each line */
+  background-color: white;  /* White color for the lines */
+  margin: 1px 0;    /* Vertical spacing between lines */
+  transition: 0.4s; /* Smooth transition effect */
+}
+
+/* Burger menu on mobile */
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    width: 100%;
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  .nav-links.active {
-    display: block;
-  }
-
   .burger-menu {
-    display: block;
+    display: block; /* Ensure burger menu is visible on small screens */
   }
-  .logout {
-    background-color: aqua;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: all 0.3s ease; /* Smooth transition for all properties */
-  }
+}
 
-  .logout:hover {
-    background-color: blue; /* Darker background on hover */
-    color: white; /* Change text color on hover */
-    transform: scale(1.05); /* Slightly increase the size of the button on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
-  }
+/* Content styling */
+.dashboard-container {
+  margin-left: 0;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
 
+.sidebar.active ~ .dashboard-container {
+  margin-left: 250px; /* Shift content when sidebar is active */
+}
+
+/* Logout button styling */
+.logout {
+  background-color: #3e6fa2;  /* A calming blue for the logout button */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.logout:hover {
+  background-color: #34598a;  /* Slightly darker blue on hover */
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.sub-content {
+  display: flex;
+  margin:75px 0;
+  background-color: #3e6fa2;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  flex-grow: 1;
+}
+
+/* Ensuring the page content stays centered */
+.sub-content a {
+  margin-bottom: 15px;
+}
+
+.sub-content h2 {
+  margin: 20px 0;
+  font-size: 24px;
+  color: #333;
+}
+.sub-burger-menu{
+  display: flex;
+  flex-direction: row;
+}
+
+/* Optional: Styling for app-default if needed */
+app-default {
+  margin-top: 20px;
 }

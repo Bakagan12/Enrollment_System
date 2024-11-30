@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth.service';
-import {DefaultComponent} from '../../site/default/default.component'
+import { DefaultComponent } from '../../site/default/default.component';
 
 @Component({
   selector: 'app-default-dashboard',
@@ -14,19 +14,17 @@ export class DefaultDashboardComponent {
   username: string | null = '';
   isMenuOpen = false;
 
-
   constructor(private router: Router, private authService: AuthService) {
     const token = localStorage.getItem('auth_token');
     if (token) {
       this.username = localStorage.getItem('username');
-
     } else {
       this.router.navigate(['/auth/login']);
     }
   }
 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuOpen = !this.isMenuOpen; // Toggle the sidebar state
   }
 
   logout() {

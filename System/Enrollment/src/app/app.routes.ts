@@ -3,7 +3,6 @@ import { LoginComponent } from './views/site/login/login.component';
 import { DefaultDashboardComponent } from './views/dashboard/default-dashboard/default-dashboard.component';
 import { AuthGuard } from './Guard/auth-guard.guard';
 import { AuthService } from './auth.service';
-import {AppComponent} from './app.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },

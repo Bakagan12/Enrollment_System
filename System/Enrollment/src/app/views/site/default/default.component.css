@@ -1,3 +1,19 @@
 div{
   background-color: blue;
 }
+.menu{
+  display: flex;
+  height: 100%;
+  width: 1310px;
+}
+.menu ul li{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between ;
+  gap: 80px;
+  padding: 30px;
+  margin: 30px 0px;
+}
+li{
+  justify-content: space-between;
+}
