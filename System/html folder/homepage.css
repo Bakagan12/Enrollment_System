@@ -1,0 +1,366 @@
+/* Reset and General Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Header Section */
+header {
+    background-color: #081f37; /* First Color */
+    height: 11vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo {
+    position:fixed;
+    margin-top: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+/* Logo Section */
+.logo-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-section img {
+    max-width: 70px;
+    height: auto;
+}
+
+nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links{
+ margin-bottom: 35px;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+}
+
+nav ul li a {
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+nav ul li a:hover, .btn-logout {
+    background-color: #2e79ba; /* Third Color */
+}
+
+/* Hero Section */
+.hero {
+    background: url('hero-bg.jpg') no-repeat center center/cover;
+    height: 100vh;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hero-buttons .btn {
+    background-color: #1e549f; /* Fourth Color */
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.hero-buttons .btn-alt {
+    background-color: #5fc9f3; /* Second Color */
+}
+
+/* Carousel Section */
+.carousel {
+    width: 100%;
+    max-width: 1330px;
+    margin: 5px auto;  
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    height: 60vh;
+    display: none;
+    position: relative;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Carousel Controls */
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none; /* Prevents buttons from interfering with swiping on touchscreens */
+}
+
+.carousel-controls button {
+    pointer-events: auto; /* Enables pointer events for buttons */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 50%;
+}
+
+.carousel-controls button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prev {
+    position: absolute;
+    left: 10px;
+}
+
+.next {
+    position: absolute;
+    right: 10px;
+}
+
+@media (max-width: 768px) {
+    .carousel-controls button {
+        font-size: 1.5rem;
+        padding: 8px;
+    }
+}
+
+/* About Us Section */
+.about {
+    background-color: #f0f0f0;
+    padding: 50px 0;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.about-content > div {
+    flex: 1;
+    min-width: 250px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+    color: #081f37; /* First Color */
+}
+
+p {
+    line-height: 1.6;
+}
+
+/* Vision and Mission in 2 Columns */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.column {
+    flex: 1;
+    min-width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Programs Section */
+.programs {
+    padding: 50px 0;
+    background-color: white; /* Second Color */
+    text-align: center;
+}
+
+.program-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.program-card {
+    flex: 1;
+    min-width: 250px;
+    padding: 20px;
+    background-color: #2e79ba; /* Third Color */
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Footer Section */
+footer {
+    background-color: #081f37; /* First Color */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+footer .footer-content {
+    font-size: 14px;
+}
+
+
+.contact-details {
+    background-color: #cbe7ff; /* Light background color for contrast */
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contact-info {
+    background-color: #cbe7ff;
+    display: flex;
+    justify-content: space-between; /* Aligns columns horizontally */
+    align-items: center; /* Centers content vertically */
+    flex-wrap: nowrap; /* Keeps the columns in a single row */
+    gap: 20px; /* Adds space between the logo and info */
+}
+
+.contact-info p a {
+    color: black; /* Sets the font color to black */
+    text-decoration: none; /* Removes underline (optional) */
+}
+
+.contact-info p a:hover {
+    text-decoration: underline; /* Optional hover effect */
+}
+
+.logo-column {
+    flex: 1; /* Takes up less space compared to info-column */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.info-column {
+    flex: 2; /* Takes more space compared to logo-column */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #081f37;
+}
+
+.info-column p {
+    margin: 8px 0;
+}
+
+.social-icons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.social-icons a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #333;
+}
+
+.social-icons a:hover {
+    color: #0077b5; /* Change color on hover */
+}
+
+
+
+/* Carousel Indicators (Circles) */
+.carousel-indicators {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.carousel-indicators .indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #1e549f;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-indicators .indicator.active {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.round-img{
+    border-radius: 20px;
+}
