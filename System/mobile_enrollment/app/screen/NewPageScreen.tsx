@@ -1,13 +1,8 @@
-// app/tabs/newpage.tsx
-import React from 'react';
+// app/screens/NewPageScreen.tsx
 import { View, Text, StyleSheet } from 'react-native';
 
 const NewPageScreen = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Welcome to the New Page!</Text>
-    </View>
-  );
+  return ;
 };
 
 const styles = StyleSheet.create({
@@ -18,6 +13,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 24,
+    fontWeight: 'bold',
   },
 });
 
