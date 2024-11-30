@@ -1,8 +1,13 @@
 // app/screens/NewPageScreen.tsx
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const NewPageScreen = () => {
-  return ;
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Welcome to the New Page!</Text>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
