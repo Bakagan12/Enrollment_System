@@ -1,0 +1,55 @@
+<div class="flex items-center justify-between bg-teal-700 text-white px-5 py-3 shadow-md">
+  <span class="text-lg font-semibold">Hello, ADMIN!</span>
+  <button class="bg-red-500 px-4 py-2 rounded-md text-white hover:bg-red-600 transition" onclick="logout()">Logout</button>
+</div>
+
+<!-- Header -->
+<header class="text-center py-8">
+  <h1 class="text-4xl font-bold text-gray-900">Enrollment Dashboard</h1>
+  <h5 class="text-lg text-gray-500 mt-2">Please select a module to begin.</h5>
+</header>
+
+<!-- Main Content -->
+<main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-5">
+  <section class="flex flex-col items-center">
+      <a routerLink="/admin/dashboard" class="w-32 h-32 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden">
+          <img src="assets/src/img/dashboard/images/admin.png" alt="Administrators" class="object-cover">
+      </a>
+      <h2 class="text-lg font-semibold mt-4">Administrators</h2>
+  </section>
+
+  <section class="flex flex-col items-center">
+      <a href="staff.html" class="w-32 h-32 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden">
+          <img src="assets/src/img/dashboard/images/staff.png" alt="Staff" class="object-cover">
+      </a>
+      <h2 class="text-lg font-semibold mt-4">Staff</h2>
+  </section>
+
+  <section class="flex flex-col items-center">
+      <a href="registrar.html" class="w-32 h-32 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden">
+          <img src="assets/src/img/dashboard/images/registrar.png" alt="Registrar" class="object-cover">
+      </a>
+      <h2 class="text-lg font-semibold mt-4">Registrar</h2>
+  </section>
+
+  <section class="flex flex-col items-center">
+      <a href="schedule.html" class="w-32 h-32 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden">
+          <img src="assets/src/img/dashboard/images/scheduler.png" alt="Scheduler" class="object-cover">
+      </a>
+      <h2 class="text-lg font-semibold mt-4">Scheduler</h2>
+  </section>
+
+  <section class="flex flex-col items-center">
+      <a href="enrollment.html" class="w-32 h-32 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden">
+          <img src="assets/src/img/dashboard/images/enrollment.png" alt="Enrollment" class="object-cover">
+      </a>
+      <h2 class="text-lg font-semibold mt-4">Enrollment</h2>
+  </section>
+
+  <section class="flex flex-col items-center">
+      <a href="student-formation.html" class="w-32 h-32 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden">
+          <img src="assets/src/img/dashboard/images/studentInfo.png" alt="Student Formation" class="object-cover">
+      </a>
+      <h2 class="text-lg font-semibold mt-4">Student Formation</h2>
+  </section>
+</main>

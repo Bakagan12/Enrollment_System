@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+<app-header></app-header>
+<app-side-bar></app-side-bar>
+
+  <!-- Main Content -->
+  <div class="ml-64 mt-16 p-8">
+    <h1 class="text-2xl font-bold mb-6">Admin Dashboard</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded shadow-lg flex items-center">
+        <img src="assets/src/img/dashboard/images/admin.png" alt="Administrators" class="w-16 h-16 mr-4 rounded-lg">
+        <div>
+          <h3 class="text-xl font-semibold">Report Card</h3>
+          <a href="#" class="text-blue-500 hover:underline">View Details</a>
+        </div>
+      </div>
+      <div class="bg-white p-6 rounded shadow-lg flex items-center">
+        <img src="assets/images/staff.png" alt="Staff" class="w-16 h-16 mr-4 rounded-lg">
+        <div>
+          <h3 class="text-xl font-semibold">Deportment Grade Monitoring</h3>
+          <a href="#" class="text-blue-500 hover:underline">View Details</a>
+        </div>
+      </div>
+      <div class="bg-white p-6 rounded shadow-lg flex items-center">
+        <img src="assets/images/registrar.png" alt="Registrar" class="w-16 h-16 mr-4 rounded-lg">
+        <div>
+          <h3 class="text-xl font-semibold">Deportment Summary</h3>
+          <a href="#" class="text-blue-500 hover:underline">View Details</a>
+        </div>
+      </div>
+      <div class="bg-white p-6 rounded shadow-lg flex items-center">
+        <img src="assets/images/scheduler.png" alt="Scheduler" class="w-16 h-16 mr-4 rounded-lg">
+        <div>
+          <h3 class="text-xl font-semibold">User Credentials</h3>
+          <a href="#" class="text-blue-500 hover:underline">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+
+</body>
+
+</html>
+  <script>
+    function logout() {
+      alert('Logging out...');
+      window.location.href = 'login.html';
+    }
+  </script>
+
