@@ -5,11 +5,12 @@ import { ContactDetailsComponent } from '../contact-details/contact-details.comp
 import { ProgramsComponent } from '../programs/programs.component';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
+import {LoginComponent} from '../../site/login/login.component';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [RouterModule, AboutComponent, ContactDetailsComponent, ProgramsComponent, FooterComponent, CommonModule],
+  imports: [RouterModule, AboutComponent, ContactDetailsComponent, ProgramsComponent, FooterComponent, CommonModule,LoginComponent],
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css'],
 })
@@ -26,14 +27,12 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.startAutoSlide();
-    window.addEventListener('keydown', this.onKeyDown.bind(this));
   }
 
   ngOnDestroy(): void {
     if (this.slideInterval) {
       clearInterval(this.slideInterval);
     }
-    window.removeEventListener('keydown', this.onKeyDown.bind(this));
   }
 
   startAutoSlide(): void {
@@ -54,21 +53,5 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   goToSlide(index: number): void {
     this.currentSlideIndex = index;
-  }
-
-  onKeyDown(event: KeyboardEvent): void {
-    if (event.key === 'ArrowLeft') {
-      this.prevSlide();
-    } else if (event.key === 'ArrowRight') {
-      this.nextSlide();
-    }
-  }
-
-  onKeyPress(event: KeyboardEvent): void {
-    console.log('Key Press:', event);
-  }
-
-  onKeyUp(event: KeyboardEvent): void {
-    console.log('Key Up:', event);
   }
 }
