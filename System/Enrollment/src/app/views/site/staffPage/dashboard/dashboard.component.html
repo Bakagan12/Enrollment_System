@@ -1,0 +1,86 @@
+<!-- <app-dashboard></app-dashboard> -->
+<app-header></app-header>
+  <div class="main-content flex mt-16">
+    <div class="sidebar bg-gray-200 fixed top-16 left-0 w-64 h-full p-4 shadow-md">
+      <a href="index.html">
+        <img src="assets/images/staff.png" alt="Administrators" class="block mx-auto w-3/4">
+      </a>
+      <h2 class="text-center text-2xl mb-6">Staff</h2>
+      <ul class="list-none">
+        <li class="mb-4"><a href="dashboard.html" class="text-lg flex items-center gap-2 hover:bg-blue-700 text-black py-2 px-3 rounded-md"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li class="mb-4"><a href="combined.html" class="text-lg flex items-center gap-2 hover:bg-blue-700 text-black py-2 px-3 rounded-md"><i class="fas fa-users-cog"></i> Users & Roles</a></li>
+        <li class="mb-4"><a href="school-announcements.html" class="text-lg flex items-center gap-2 hover:bg-blue-700 text-black py-2 px-3 rounded-md"><i class="fas fa-bullhorn"></i> School Announcements</a></li>
+        <li class="mb-4"><a href="reports.html" class="text-lg flex items-center gap-2 hover:bg-blue-700 text-black py-2 px-3 rounded-md"><i class="fas fa-chart-bar"></i> Reports</a></li>
+      </ul>
+    </div>
+
+    <div class="dashboard-container flex-1 p-6">
+      <div class="panel bg-white shadow-lg p-8 rounded-lg">
+        <div class="panel-heading mb-4">
+          <h1 class="text-3xl font-semibold">Staff List</h1>
+        </div>
+
+        <div class="panel-body mb-4">
+          <div class="search-and-filter flex justify-between items-center mb-6">
+            <select id="role-filter" class="bg-gray-200 px-4 py-2 rounded-md">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+
+            <div class="search-bar-container flex items-center gap-2">
+              <label for="staff-search" class="text-lg">Search Staff:</label>
+              <input type="text" id="staff-search" class="px-4 py-2 border rounded-md" placeholder="Search by name..." >
+            </div>
+          </div>
+        </div>
+
+        <div class="employee-table-container overflow-x-auto">
+          <table class="employee-table w-full border-collapse">
+            <thead>
+              <tr>
+                <th class="py-2 px-4 text-left cursor-pointer">Employee No.</th>
+                <th class="py-2 px-4 text-left cursor-pointer">Employee Name</th>
+                <th class="py-2 px-4 text-left cursor-pointer">RFID No.</th>
+                <th class="py-2 px-4 text-left cursor-pointer">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 px-4">001</td>
+                <td class="py-2 px-4">John Doe</td>
+                <td class="py-2 px-4">RFID1234</td>
+                <td class="py-2 px-4 flex gap-2">
+                  <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Edit</button>
+                  <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-400">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 px-4">002</td>
+                <td class="py-2 px-4">Jane Smith</td>
+                <td class="py-2 px-4">RFID5678</td>
+                <td class="py-2 px-4 flex gap-2">
+                  <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Edit</button>
+                  <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-400">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 px-4">003</td>
+                <td class="py-2 px-4">Mark Johnson</td>
+                <td class="py-2 px-4">RFID9101</td>
+                <td class="py-2 px-4 flex gap-2">
+                  <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400">Edit</button>
+                  <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-400">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    <app-footer></app-footer>
+      </div>
+    </div>
+  </div>
+
+

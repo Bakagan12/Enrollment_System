@@ -9,6 +9,7 @@ import { AboutComponent } from './views/homePage/about/about.component';
 import { ProgramsComponent } from './views/homePage/programs/programs.component';
 import {DashboardComponent} from './views/site/submaindashboard/dashboard/dashboard.component';
 import {AdminDashboardComponent} from './views/site/adminPage/admin-dashboard/admin-dashboard.component';
+import {StaffDashboardComponent} from './views/site/staffPage/dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -20,11 +21,14 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
   { path: 'programs', component: ProgramsComponent },
   { path: 'contact-details', component: ContactDetailsComponent },
-  { path: 'submain/dashboard', component: DashboardComponent },
+  { path: 'submain/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 
   //Admin
-  { path: 'admin/dashboard', component: AdminDashboardComponent },
+  { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
 //     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
 //   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
 //   { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] }
+//Staff
+{ path: 'staff/dashboard', component: StaffDashboardComponent},
+
 ];
