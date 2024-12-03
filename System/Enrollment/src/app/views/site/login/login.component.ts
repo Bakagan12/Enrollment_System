@@ -32,7 +32,7 @@ export class LoginComponent {
         console.log('Login successful:', response);
         localStorage.setItem('auth_token', response.token);
         localStorage.setItem('username', username);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/submain/dashboard']);
       },
       (error) => {
         // Handle errors from the server

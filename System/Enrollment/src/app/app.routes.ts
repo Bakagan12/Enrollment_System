@@ -7,6 +7,8 @@ import { LandingPageComponent } from './views/homePage/landing-page/landing-page
 import { LoginComponent } from './views/site/login/login.component';
 import { AboutComponent } from './views/homePage/about/about.component';
 import { ProgramsComponent } from './views/homePage/programs/programs.component';
+import {DashboardComponent} from './views/site/submaindashboard/dashboard/dashboard.component';
+import {AdminDashboardComponent} from './views/site/adminPage/admin-dashboard/admin-dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -18,6 +20,10 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
   { path: 'programs', component: ProgramsComponent },
   { path: 'contact-details', component: ContactDetailsComponent },
+  { path: 'submain/dashboard', component: DashboardComponent },
+
+  //Admin
+  { path: 'admin/dashboard', component: AdminDashboardComponent },
 //     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
 //   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
 //   { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] }
