@@ -1,9 +1,9 @@
-<app-dashboard></app-dashboard>
-
+<!-- <app-dashboard></app-dashboard> -->
+<app-header></app-header>
   <div class="main-content flex mt-16">
     <div class="sidebar bg-gray-200 fixed top-16 left-0 w-64 h-full p-4 shadow-md">
       <a href="index.html">
-        <img src="images/staff.png" alt="Administrators" class="block mx-auto w-3/4">
+        <img src="assets/images/staff.png" alt="Administrators" class="block mx-auto w-3/4">
       </a>
       <h2 class="text-center text-2xl mb-6">Staff</h2>
       <ul class="list-none">
@@ -32,7 +32,7 @@
 
             <div class="search-bar-container flex items-center gap-2">
               <label for="staff-search" class="text-lg">Search Staff:</label>
-              <input type="text" id="staff-search" class="px-4 py-2 border rounded-md" placeholder="Search by name..." (keyup)="searchStaff()">
+              <input type="text" id="staff-search" class="px-4 py-2 border rounded-md" placeholder="Search by name..." >
             </div>
           </div>
         </div>
@@ -78,46 +78,9 @@
             </tbody>
           </table>
         </div>
-
     <app-footer></app-footer>
       </div>
     </div>
   </div>
 
-  <script>
-    function logout() {
-      alert('Logging out...');
-      window.location.href = 'login.html';
-    }
-
-    function searchStaff() {
-      const searchInput = document.getElementById('staff-search').value.toLowerCase();
-    }
-
-    let currentPage = 1;
-
-    function goToPage(page) {
-      if (page === 'prev') {
-        if (currentPage > 1) {
-          currentPage--;
-        }
-      } else if (page === 'next') {
-        currentPage++;
-      } else {
-        currentPage = page;
-      }
-
-      const pages = document.querySelectorAll('.page-number');
-      pages.forEach((button, index) => {
-        if (index + 1 === currentPage) {
-          button.classList.add('active');
-        } else {
-          button.classList.remove('active');
-        }
-      });
-
-      const paginationInfo = document.querySelector('.pagination-info');
-      paginationInfo.textContent = `Showing ${currentPage * 10 - 9} to ${currentPage * 10} of 99 entries`;
-    }
-  </script>
 
