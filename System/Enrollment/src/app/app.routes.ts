@@ -11,6 +11,8 @@ import {DashboardComponent} from './views/site/submaindashboard/dashboard/dashbo
 import {AdminDashboardComponent} from './views/site/adminPage/admin-dashboard/admin-dashboard.component';
 import {StaffDashboardComponent} from './views/site/staffPage/dashboard/dashboard.component';
 import {UserRolesComponent} from './views/site/adminPage/user-roles/user-roles.component';
+import {AnnouncementComponent} from './views/site/adminPage/announcements/announcements.component'
+import {ReportsComponent} from './views/site/adminPage/reports/reports.component'
 
 export const routes: Routes = [
 
@@ -28,7 +30,9 @@ export const routes: Routes = [
 
   //Admin
   { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
-  { path: 'admin/user/role', component: UserRolesComponent, canActivate: [AuthGuard] },
+  { path: 'admin/dashboard/user/role', component: UserRolesComponent, canActivate: [AuthGuard] },
+  { path: 'admin/dashboard/announcements', component: AnnouncementComponent, canActivate: [AuthGuard] },
+  { path: 'admin/dashboard/reports', component: ReportsComponent, canActivate: [AuthGuard] },
 
   //Staff
   { path: 'staff/dashboard', component: StaffDashboardComponent, canActivate: [AuthGuard]},
