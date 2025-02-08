@@ -1,11 +1,12 @@
-// backend/validator/validation.js
+// backend/validator/validation.ts
 
-const { body } = require('express-validator');
-const GenUser = require('../models/genUser');
+import { body } from 'express-validator';
+import * as GenUser from '../models/genUser';
 
 // Validation for sign up
-exports.signupValidation = [
+export const signupValidation = [
     body('username').trim().not().isEmpty().withMessage('Username is required.'),
+    // Uncomment and adjust if needed for email validation
     // body('email')
     //     .isEmail()
     //     .withMessage('Please enter a valid email.')
@@ -23,7 +24,7 @@ exports.signupValidation = [
 ];
 
 // Validation for login
-exports.loginValidation = [
+export const loginValidation = [
     body('username').trim().not().isEmpty().withMessage('Please enter a correct username'),
     body('password')
         .trim()

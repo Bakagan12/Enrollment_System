@@ -3,5 +3,6 @@
     "host": "localhost",
     "user": "root",
     "database": "sta_cruz",
-    "password": ""
+    "password": "",
+    "JWT_SECRET": "mysecretkey123"
 }
