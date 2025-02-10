@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../auth.service';
+import { AuthService } from '../../../service/auth/auth.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
 import { CommonModule } from '@angular/common';
 import { tap } from 'rxjs/operators';
@@ -23,35 +23,39 @@ export class LoginComponent {
     });
   }
 
- // Method to handle login
- login() {
-  if (this.loginForm.valid) {
-    const { username, password } = this.loginForm.value; // Get form values
-    this.authService.login(username, password).subscribe(
-      (response) => {
-        console.log('Login successful:', response);
-        localStorage.setItem('auth_token', response.token);
-        localStorage.setItem('username', username);
-        this.router.navigate(['/submain/dashboard']);
-      },
-      (error) => {
-        // Handle errors from the server
-        if (error.error && error.error.message) {
-          if (error.error.message === 'Invalid username') {
-            this.errorMessage = 'The username you entered is incorrect.';
-          } else if (error.error.message === 'Invalid password') {
-            this.errorMessage = 'The password you entered is incorrect.';
+   // Method to handle login
+   login() {
+    if (this.loginForm.valid) {
+      const { username, password } = this.loginForm.value; // Get form values
+      this.authService.login(username, password).subscribe(
+        (response) => {
+          console.log('Login successful:', response);
+          localStorage.setItem('auth_token', response.token);
+          localStorage.setItem('username', username);
+          this.router.navigate(['/submain/dashboard']);
+        },
+        (error) => {
+          // Handle errors from the server
+          if (error.error && error.error.message) {
+            if (error.error.message === 'Invalid username') {
+              this.errorMessage = 'The username you entered is incorrect.';
+            } else if (error.error.message === 'Invalid password') {
+              this.errorMessage = 'The password you entered is incorrect.';
+            } else {
+              this.errorMessage = 'An unexpected error occurred. Please try again.';
+            }
           } else {
             this.errorMessage = 'An unexpected error occurred. Please try again.';
           }
-        } else {
-          this.errorMessage = 'An unexpected error occurred. Please try again.';
+          console.error('Login failed:', error); // Log the error
         }
-        console.error('Login failed:', error); // Log the error
-      }
-    );
-  } else {
-    this.errorMessage = 'Please fill in both fields correctly.'; // Show error if form is invalid
+      );
+    } else {
+      this.errorMessage = 'Please fill in both fields correctly.'; // Show error if form is invalid
+    }
   }
-}
+  goToOnlineRegistration() {
+    this.router.navigate(['/online_registration']);
+  }
+
 }
