@@ -11,8 +11,9 @@ import {DashboardComponent} from './views/site/submaindashboard/dashboard/dashbo
 import {AdminDashboardComponent} from './views/site/adminPage/admin-dashboard/admin-dashboard.component';
 import {StaffDashboardComponent} from './views/site/staffPage/dashboard/dashboard.component';
 import {UserRolesComponent} from './views/site/adminPage/user-roles/user-roles.component';
-import {AnnouncementComponent} from './views/site/adminPage/announcements/announcements.component'
-import {ReportsComponent} from './views/site/adminPage/reports/reports.component'
+import {AnnouncementComponent} from './views/site/adminPage/announcements/announcements.component';
+import {ReportsComponent} from './views/site/adminPage/reports/reports.component';
+import {OnlineRegistrationComponent} from './views/site/onlineRegistration/online-registration/online-registration.component';
 
 export const routes: Routes = [
 
@@ -27,6 +28,9 @@ export const routes: Routes = [
   { path: 'programs', component: ProgramsComponent },
   { path: 'contact-details', component: ContactDetailsComponent },
   { path: 'submain/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+
+  //Online Register
+  {path: 'online_registration', component: OnlineRegistrationComponent},
 
   //Admin
   { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },

@@ -1,7 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { GenUser } from '../models/genUser'; // Assuming this is also TypeScript now
+import { GenUser } from '../models/genUser';
+import { Persons } from '../models/persons';
 import config from '../config/config.json';
+import { authRepository } from '../repository/auth';
 
 const JWT_SECRET: string = config.JWT_SECRET || 'your_jwt_secret';
 
@@ -20,7 +22,7 @@ export const createUser = async (username: string, password: string): Promise<{ 
 
         // Save user in the database
         const user: User = {username, password: hashedPassword };
-        await GenUser.save(user);
+        await authRepository.save(user);
 
         return { message: 'User Registered!' };
     } catch (err) {
@@ -31,7 +33,7 @@ export const createUser = async (username: string, password: string): Promise<{ 
 // Find a user by username (for login)
 export const findUserByUsername = async (username: string): Promise<User | null> => {
     try {
-        const result = await GenUser.find(username);
+        const result = await authRepository.find(username);
         return result[0][0] || null;
     } catch (err) {
         throw new Error('Error finding user: ' + (err as Error).message);
