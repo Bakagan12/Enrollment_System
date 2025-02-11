@@ -3,11 +3,10 @@ import jwt from 'jsonwebtoken';
 import { GenUser } from '../../models/genUser';
 import { Persons } from '../../models/persons';
 import config from '../../config/config.json';
-import { authRepository } from '../../repository/auth/auth';
+import { authRepository } from '../../repository/authRepository/auth';
 
 const JWT_SECRET: string = config.JWT_SECRET || 'your_jwt_secret';
 
-// Define the User type (if needed for TypeScript)
 interface User {
     id?: string;
     username: string;
