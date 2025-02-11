@@ -9,5 +9,5 @@ export class GenUser {
         this.password = password;
     }
 
-    
+
 }

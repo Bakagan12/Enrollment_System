@@ -1,7 +1,7 @@
 // backend/src/index.ts
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
-import authRoutes from './routes/auth/authRoutes';
+import authRoutes from './routes/authRoute/authRoutes';
 import * as errorController from './controllers/error/error';
 import { testDbConnection } from './util/database';
 import dotenv from 'dotenv';
