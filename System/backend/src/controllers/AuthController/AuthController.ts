@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
-import * as userService from '../../services/userService';
+import * as userService from '../../services/UserService/userService';
 
 interface CustomError extends Error {
     statusCode?: number;

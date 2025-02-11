@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { GenUser } from '../models/genUser';
-import { Persons } from '../models/persons';
-import config from '../config/config.json';
-import { authRepository } from '../repository/auth';
+import { GenUser } from '../../models/genUser';
+import { Persons } from '../../models/persons';
+import config from '../../config/config.json';
+import { authRepository } from '../../repository/auth/auth';
 
 const JWT_SECRET: string = config.JWT_SECRET || 'your_jwt_secret';
 
