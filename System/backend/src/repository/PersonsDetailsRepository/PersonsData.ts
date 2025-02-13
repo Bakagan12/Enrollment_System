@@ -14,7 +14,7 @@ export class PersonDataRepository {
             gender: persons.gender,
             address: persons.address,
             email: persons.email,
-            contact_no: persons.contact_no,
+            contact_no: persons.contact_number,
             student_guardian_id: persons.student_guardian_id,
             student_emergency_contact_name: persons.student_emergency_contact_name,
             student_emergency_contact_no: persons.student_emergency_contact_no,

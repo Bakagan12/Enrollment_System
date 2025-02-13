@@ -3,11 +3,14 @@ export class Persons {
     last_name: string;
     middle_name: string;
     suffix_id: number;
+    age: number;
     date_of_birth: Date;
+    place_of_birth: string;
     gender: string;
+    citizenship: string;
     address: number;
     email: string;
-    contact_no: string;
+    contact_number: string;
     student_guardian_id: number;
     student_emergency_contact_name: string;
     student_emergency_contact_no: string;
@@ -20,11 +23,14 @@ export class Persons {
         last_name: string,
         middle_name: string,
         suffix_id: number,
+        age: number,
         date_of_birth: Date,
+        place_of_birth: string,
         gender: string,
+        citizenship: string,
         address: number,
         email: string,
-        contact_no: string,
+        contact_number: string,
         student_guardian_id: number,
         student_emergency_contact_name: string,
         student_emergency_contact_no: string,
@@ -36,11 +42,14 @@ export class Persons {
         this.last_name = last_name;
         this.middle_name = middle_name;
         this.suffix_id = suffix_id;
+        this.age = age;
         this.date_of_birth = date_of_birth;
+        this.place_of_birth = place_of_birth;
         this.gender = gender;
+        this.citizenship = citizenship;
         this.address = address;
         this.email = email;
-        this.contact_no = contact_no;
+        this.contact_number = contact_number;
         this.student_guardian_id = student_guardian_id;
         this.student_emergency_contact_name = student_emergency_contact_name;
         this.student_emergency_contact_no = student_emergency_contact_no;
