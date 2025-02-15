@@ -24,7 +24,7 @@ export class StudentGuardian{
             this.suffix_id = suffix_id;
             this.address = address;
             this.contact_no = contact_no;
-            this.email_address = last_name;
+            this.email_address = email_address;
             this.occupation = occupation;
             this.occ_address = occ_address;
 
