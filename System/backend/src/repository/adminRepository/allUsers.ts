@@ -10,6 +10,7 @@ import { StudentEmergencyContact } from "../../models/studentEmergencyContact";
 import { Student } from "../../models/students";
 import { StudentMedicalHistory } from "../../models/studentMedicalHistory";
 
+
 export class allUserRepo{
     static async findAllUsers(): Promise<any> {
         return db('gen_users')
@@ -73,20 +74,28 @@ export class allUserRepo{
             });
         }
 
-        static async RegisterNewStudent(user: GenUser, person: Persons, student:Student, guardian:StudentGuardian,contact:StudentEmergencyContact, medical:StudentMedicalHistory): Promise<any> {
+        static async RegisterNewStudent(
+            user: GenUser, 
+            person: Persons, 
+            student: Student, 
+            guardian: StudentGuardian, 
+            contact: StudentEmergencyContact
+        ): Promise<any> {
             let baseUsername = `${person.first_name.toLowerCase()}.${person.last_name.toLowerCase()}`;
             const generatedPassword = uuidv4();
-
+        
             let username = baseUsername;
             let counter = 1;
         
+            // Ensure unique username
             while (await db('gen_users').where('username', username).first()) {
                 username = `${baseUsername}${counter}`;
                 counter++;
             }
         
-            return db('persons')
-                .insert({
+            try {
+                // Insert person record
+                const personResult = await db('persons').insert({
                     first_name: person.first_name,
                     middle_name: person.middle_name,
                     last_name: person.last_name,
@@ -99,25 +108,60 @@ export class allUserRepo{
                     address: person.address,
                     email: person.email,
                     contact_no: person.contact_number,
-                })
-                .returning('*')
-                .then((result) => {
-                    const personId = result[0].id;
+                }).returning('*');
+                const personId = personResult[0].id;
         
-                    return db('gen_users')
-                        .insert({
-                            person_id: personId,
-                            username: username,
-                            password: generatedPassword,
-                            user_role_id:user.user_role_id
-                        })
-                        .returning('*');
-                })
-                .then((result) => {
-                    return result;
-                })
-                .catch((error) => {
-                    throw new Error(`Error saving creating User: ${error.message}`);
-                });
+                // Insert user record
+                const userResult = await db('gen_users').insert({
+                    person_id: personId,
+                    username: username,
+                    password: generatedPassword,
+                    user_role_id: user.user_role_id
+                }).returning('*');
+        
+                // Insert guardian record
+                const guardianResult = await db('student_guardian').insert({
+                    first_name: guardian.first_name,
+                    middle_name: guardian.middle_name,
+                    last_name: guardian.last_name,
+                    suffix_id: guardian.suffix_id,
+                    address: guardian.address,
+                    contact_no: guardian.contact_no,
+                    email_address: guardian.email_address,
+                    occupation: guardian.occupation,
+                    occ_address: guardian.occ_address,
+                }).returning('*');
+                const guardianId = guardianResult[0].id;
+        
+                // Insert emergency contact record
+                const contactResult = await db('student_emergency_contact').insert({
+                    first_name: contact.first_name,
+                    middle_name: contact.middle_name,
+                    last_name: contact.last_name,
+                    suffix_id: contact.suffix_id,
+                    address: contact.address,
+                    contact_no: contact.contact_no,
+                    email_address: contact.email_address,
+                    // occupation: contact.occupation,
+                    // occ_address: contact.occ_address,
+                }).returning('*');
+                const contactId = contactResult[0].id;
+        
+                // Insert student record
+                const studentResult = await db('students').insert({
+                    person_id: personId,
+                    guardian_id: guardianId,
+                    emergency_contact_id: contactId
+                }).returning('*');
+
+                return studentResult;
+
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                    throw new Error(`Error creating User: ${error.message}`);
+                } else {
+                    throw new Error('An unknown error occurred');
+                }
             }
+        }
 }
