@@ -40,7 +40,8 @@ exports.testDbConnection = exports.app = void 0;
 // backend/src/index.ts
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const authRoutes_1 = __importDefault(require("./routes/auth/authRoutes"));
+const authRoutes_1 = __importDefault(require("./routes/authRoute/authRoutes"));
+const allUserRoute_1 = __importDefault(require("./routes/adminRoute/allUser/allUserRoute"));
 const errorController = __importStar(require("./controllers/error/error"));
 const database_1 = require("./util/database");
 Object.defineProperty(exports, "testDbConnection", { enumerable: true, get: function () { return database_1.testDbConnection; } });
@@ -59,6 +60,7 @@ app.use((req, res, next) => {
 });
 // Define the routes
 app.use('/auth', authRoutes_1.default);
+app.use('/register', allUserRoute_1.default);
 // Error handling middleware
 app.use(errorController.get404);
 app.use(errorController.get500);

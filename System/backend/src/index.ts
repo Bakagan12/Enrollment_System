@@ -2,6 +2,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import authRoutes from './routes/authRoute/authRoutes';
+import departmentalUsers from './routes/adminRoute/allUser/allUserRoute'
 import * as errorController from './controllers/error/error';
 import { testDbConnection } from './util/database';
 import dotenv from 'dotenv';
@@ -23,6 +24,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // Define the routes
 app.use('/auth', authRoutes);
+app.use('/register', departmentalUsers);
 
 // Error handling middleware
 app.use(errorController.get404);

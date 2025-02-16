@@ -48,7 +48,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.logout = exports.login = exports.signup = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const express_validator_1 = require("express-validator");
-const userService = __importStar(require("../../services/userService"));
+const userService = __importStar(require("../../services/UserService/userService"));
 // Sign up
 const signup = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const errors = (0, express_validator_1.validationResult)(req);
@@ -56,9 +56,9 @@ const signup = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
         res.status(422).json({ errors: errors.array() });
         return;
     }
-    const { username, password } = req.body;
+    const { person_id, username, password, user_role_id } = req.body;
     try {
-        const result = yield userService.createUser(username, password);
+        const result = yield userService.createUser(person_id, username, password, user_role_id);
         res.status(201).json(result);
     }
     catch (err) {

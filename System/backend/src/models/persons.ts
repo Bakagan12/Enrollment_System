@@ -1,4 +1,5 @@
 export class Persons {
+    id?:number;
     first_name: string;
     last_name: string;
     middle_name: string;
@@ -19,6 +20,7 @@ export class Persons {
     student_medical_history_id: number;
 
     constructor(
+        id:number,
         first_name: string,
         last_name: string,
         middle_name: string,
@@ -38,6 +40,7 @@ export class Persons {
         student_emergency_contact_email: string,
         student_medical_history_id: number
     ) {
+        this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.middle_name = middle_name;
