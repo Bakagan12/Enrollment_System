@@ -2,31 +2,31 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth/auth.service';
 import { FooterComponent } from '../adminPage/admin-dashboard/footer/footer.component';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FooterComponent], // Standalone component imports
+  imports: [ReactiveFormsModule, CommonModule, FooterComponent],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  loginForm: FormGroup; // FormGroup for reactive form
-  errorMessage: string = ''; // Variable to store error messages
+  loginForm: FormGroup;
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
     // Initialize the form group using FormBuilder
     this.loginForm = this.fb.group({
-      username: ['', Validators.required], // Username field required
-      password: ['', Validators.required]  // Password field required
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
    // Method to handle login
    login() {
     if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value; // Get form values
+      const { username, password } = this.loginForm.value;
       this.authService.login(username, password).subscribe(
         (response) => {
           console.log('Login successful:', response);
@@ -47,11 +47,11 @@ export class LoginComponent {
           } else {
             this.errorMessage = 'An unexpected error occurred. Please try again.';
           }
-          console.error('Login failed:', error); // Log the error
+          console.error('Login failed:', error);
         }
       );
     } else {
-      this.errorMessage = 'Please fill in both fields correctly.'; // Show error if form is invalid
+      this.errorMessage = 'Please fill in both fields correctly.';
     }
   }
   goToOnlineRegistration() {

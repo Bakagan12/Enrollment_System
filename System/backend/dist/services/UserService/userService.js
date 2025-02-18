@@ -40,7 +40,12 @@ exports.createUser = createUser;
 const findUserByUsername = (username) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield auth_1.authRepository.find(username);
-        return result[0][0] || null;
+        // Check if the result is empty or undefined
+        if (!result || result.length === 0) {
+            return null; // No user found
+        }
+        // Return the first user in the result (assuming the query returns an array of users)
+        return result;
     }
     catch (err) {
         throw new Error('Error finding user: ' + err.message);

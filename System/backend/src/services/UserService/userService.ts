@@ -38,11 +38,19 @@ export const createUser = async (person_id: number,username: string, password: s
 export const findUserByUsername = async (username: string): Promise<User | null> => {
     try {
         const result = await authRepository.find(username);
-        return result[0][0] || null;
+
+        // Check if the result is empty or undefined
+        if (!result || result.length === 0) {
+            return null;  // No user found
+        }
+
+        // Return the first user in the result (assuming the query returns an array of users)
+        return result;
     } catch (err) {
         throw new Error('Error finding user: ' + (err as Error).message);
     }
 };
+
 
 // Generate JWT token after successful login
 export const generateToken = (user: User): string => {

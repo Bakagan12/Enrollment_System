@@ -22,7 +22,7 @@ declare global {
 // Middleware to authenticate JWT token
 export const authenticateJWT = (req: Request, res: Response, next: NextFunction): void => {
     const authHeader = req.headers.authorization;
-    const token = authHeader?.split(' ')[1]; // Expect 'Bearer <token>'
+    const token = authHeader?.split(' ')[1]; 
 
     if (!token) {
         res.status(403).json({ message: 'Token required' });

@@ -10,7 +10,7 @@ const JWT_SECRET = config_json_1.default.JWT_SECRET || 'your_jwt_secret';
 // Middleware to authenticate JWT token
 const authenticateJWT = (req, res, next) => {
     const authHeader = req.headers.authorization;
-    const token = authHeader === null || authHeader === void 0 ? void 0 : authHeader.split(' ')[1]; // Expect 'Bearer <token>'
+    const token = authHeader === null || authHeader === void 0 ? void 0 : authHeader.split(' ')[1];
     if (!token) {
         res.status(403).json({ message: 'Token required' });
         return;

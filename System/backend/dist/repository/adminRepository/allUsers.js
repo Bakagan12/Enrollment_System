@@ -35,9 +35,14 @@ class allUserRepo {
                 username = `${baseUsername}${counter}`;
                 counter++;
             }
+            // Ensure unique gen_user_email and the person_email
+            while (yield (0, db_1.default)('gen_users').where('gen_user_email', person.email).first()) {
+                console.log('Email already exists: ', person.email);
+                throw new Error('Email already exists');
+            }
             try {
                 // Insert the person record first
-                yield (0, db_1.default)('persons').insert({
+                const userdetails = yield (0, db_1.default)('persons').insert({
                     first_name: person.first_name,
                     middle_name: person.middle_name,
                     last_name: person.last_name,
@@ -52,30 +57,27 @@ class allUserRepo {
                     contact_no: person.contact_number,
                 });
                 // Get the ID of the inserted person
-                const personId = yield db_1.default.raw('SELECT LAST_INSERT_ID() as id');
+                const personId = userdetails[0];
                 // Ensure you extract the id properly from the result
-                const personIdValue = personId[0].id;
+                // const personIdValue = personId.id;
                 // Insert the user record using the personId
                 const userResult = yield (0, db_1.default)('gen_users').insert({
-                    person_id: person.id, // Foreign key to the person
-                    gen_user_email: person.email, // Store email from person
+                    person_id: personId,
+                    gen_user_email: person.email,
                     username: username,
                     password: generatedPassword,
                     user_role_id: user.user_role_id,
-                    status_id: user.status_id, // Store the status ID
+                    status_id: user.status_id,
                 });
-                console.log("Inserted user with person_id:", personIdValue);
-                // Return the inserted user details or relevant info
+                console.log("Inserted user with person_id:", personId);
                 return userResult;
             }
             catch (err) {
                 if (err instanceof Error) {
-                    // Now `err` is guaranteed to be an instance of `Error`
                     console.error('Error creating User: ', err.message);
                     throw new Error('Error creating User: ' + err.message);
                 }
                 else {
-                    // Handle other error types if needed
                     console.error('An unknown error occurred');
                     throw new Error('An unknown error occurred');
                 }
