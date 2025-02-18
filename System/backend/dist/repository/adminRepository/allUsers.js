@@ -56,11 +56,7 @@ class allUserRepo {
                     email: person.email,
                     contact_no: person.contact_number,
                 });
-                // Get the ID of the inserted person
                 const personId = userdetails[0];
-                // Ensure you extract the id properly from the result
-                // const personIdValue = personId.id;
-                // Insert the user record using the personId
                 const userResult = yield (0, db_1.default)('gen_users').insert({
                     person_id: personId,
                     gen_user_email: person.email,
@@ -69,7 +65,6 @@ class allUserRepo {
                     user_role_id: user.user_role_id,
                     status_id: user.status_id,
                 });
-                console.log("Inserted user with person_id:", personId);
                 return userResult;
             }
             catch (err) {
@@ -88,12 +83,27 @@ class allUserRepo {
         return __awaiter(this, void 0, void 0, function* () {
             let baseUsername = `${person.first_name.toLowerCase()}.${person.last_name.toLowerCase()}`;
             const generatedPassword = (0, uuid_1.v4)();
+            let baseGuardianUsername = `${guardian.first_name.toLowerCase()}.${guardian.last_name.toLowerCase()}`;
+            const generatedGuardianPassword = (0, uuid_1.v4)();
+            let guardian_username = baseGuardianUsername;
             let username = baseUsername;
             let counter = 1;
             // Ensure unique username
             while (yield (0, db_1.default)('gen_users').where('username', username).first()) {
                 username = `${baseUsername}${counter}`;
                 counter++;
+            }
+            while (yield (0, db_1.default)('gen_users').where('username', guardian_username).first()) {
+                guardian_username = `${baseGuardianUsername}${counter}`;
+                counter++;
+            }
+            while (yield (0, db_1.default)('gen_users').where('gen_user_email', person.email).first()) {
+                console.log('Email already exists: ', person.email);
+                throw new Error('Student Email already exists');
+            }
+            while (yield (0, db_1.default)('gen_users').where('gen_user_email', guardian.email_address).first()) {
+                console.log('Email already exists: ', guardian.email_address);
+                throw new Error('Guardian Email already exists');
             }
             try {
                 // Insert person record
@@ -110,8 +120,8 @@ class allUserRepo {
                     address: person.address,
                     email: person.email,
                     contact_no: person.contact_number,
-                }).returning('*');
-                const personId = personResult[0].id;
+                });
+                const personId = personResult[0];
                 //Insert Mother record
                 const motherResult = yield (0, db_1.default)('mother').insert({
                     first_name: mother.first_name,
@@ -123,8 +133,8 @@ class allUserRepo {
                     email_address: mother.email_address,
                     occupation: mother.occupation,
                     occ_address: mother.occ_address,
-                }).returning('*');
-                const motherId = motherResult[0].id;
+                });
+                const motherId = motherResult[0];
                 //Insert Mother record
                 const fatherResult = yield (0, db_1.default)('father').insert({
                     first_name: mother.first_name,
@@ -136,15 +146,17 @@ class allUserRepo {
                     email_address: mother.email_address,
                     occupation: mother.occupation,
                     occ_address: mother.occ_address,
-                }).returning('*');
-                const fatherId = fatherResult[0].id;
+                });
+                const fatherId = fatherResult;
                 // Insert user record
                 const userResult = yield (0, db_1.default)('gen_users').insert({
                     person_id: personId,
+                    gen_user_email: person.email,
                     username: username,
                     password: generatedPassword,
-                    user_role_id: user.user_role_id
-                }).returning('*');
+                    user_role_id: user.user_role_id,
+                    status_id: user.status_id
+                });
                 // Insert guardian record
                 const guardianResult = yield (0, db_1.default)('student_guardian').insert({
                     first_name: guardian.first_name,
@@ -156,8 +168,16 @@ class allUserRepo {
                     email_address: guardian.email_address,
                     occupation: guardian.occupation,
                     occ_address: guardian.occ_address,
-                }).returning('*');
-                const guardianId = guardianResult[0].id;
+                });
+                const guardianId = guardianResult[0];
+                const guardianUserResult = yield (0, db_1.default)('gen_users').insert({
+                    // person_id: personId,
+                    gen_user_email: guardian.email_address,
+                    username: guardian_username,
+                    password: generatedPassword,
+                    user_role_id: user.user_role_id,
+                    status_id: user.status_id
+                });
                 // Insert emergency contact record
                 const contactResult = yield (0, db_1.default)('student_emergency_contact').insert({
                     first_name: contact.first_name,
@@ -169,14 +189,23 @@ class allUserRepo {
                     email_address: contact.email_address,
                     // occupation: contact.occupation,
                     // occ_address: contact.occ_address,
-                }).returning('*');
-                const contactId = contactResult[0].id;
+                });
+                const contactId = contactResult[0];
                 // Insert student record
                 const studentResult = yield (0, db_1.default)('students').insert({
                     person_id: personId,
-                    guardian_id: guardianId,
-                    emergency_contact_id: contactId
-                }).returning('*');
+                    mother_id: motherId,
+                    father_id: fatherId,
+                    student_guardian_id: guardianId,
+                    student_emergency_contact_id: contactId,
+                    student_no: student.student_no,
+                    lrn_no: student.lrn_no,
+                    student_status_id: student.student_status_id,
+                    grade_level_id: student.grade_level_id,
+                    section_id: student.section_id,
+                    subject_id: student.subject_id,
+                    term_id: student.term_id
+                });
                 return studentResult;
             }
             catch (error) {

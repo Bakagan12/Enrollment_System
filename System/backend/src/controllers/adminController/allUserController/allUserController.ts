@@ -1,4 +1,4 @@
-import { registerNewDepartmentalUser } from "../../../services/adminService/allUsers/allUsersService";
+import { registerNewDepartmentalUser, registerNewStudent } from "../../../services/adminService/allUsers/allUsersService";
 import { Persons } from "../../../models/persons";
 import { GenUser } from "../../../models/genUser";
 import { StudentGuardian } from "../../../models/studenGuardian";
@@ -21,7 +21,7 @@ import { Request, Response, NextFunction } from 'express';
 //     }
 
 // }
-export const registerUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const registerDepartmentalUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const person: Persons = req.body.person;
         const user: GenUser = req.body.user;
@@ -39,3 +39,28 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
         });
     }
 }
+export const registerStudentUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const person: Persons = req.body.person;
+        const user: GenUser = req.body.user;
+        const student: Student = req.body.student;
+        const guardian: StudentGuardian = req.body.guardian;
+        const contact: StudentEmergencyContact = req.body.contact;
+        const mother: Mother = req.body.mother;
+        const father: Father = req.body.father;
+
+        // Call the service to register the user
+        const result = await registerNewStudent(user, person, student, guardian, contact, mother, father);
+
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Error registering Student user:', err);
+        // Send error response
+        res.status(500).json({
+            message: 'Error registering Student user',
+            error: (err instanceof Error) ? err.message : err,
+        });
+    }
+}
+
+

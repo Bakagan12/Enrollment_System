@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerUser = void 0;
+exports.registerStudentUser = exports.registerDepartmentalUser = void 0;
 const allUsersService_1 = require("../../../services/adminService/allUsers/allUsersService");
 // export class allUserController{
 //     static async allUsersController(req: any, res: any):Promise<void>{
@@ -21,7 +21,7 @@ const allUsersService_1 = require("../../../services/adminService/allUsers/allUs
 //         }
 //     }
 // }
-const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const registerDepartmentalUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const person = req.body.person;
         const user = req.body.user;
@@ -38,4 +38,27 @@ const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         });
     }
 });
-exports.registerUser = registerUser;
+exports.registerDepartmentalUser = registerDepartmentalUser;
+const registerStudentUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const person = req.body.person;
+        const user = req.body.user;
+        const student = req.body.student;
+        const guardian = req.body.guardian;
+        const contact = req.body.contact;
+        const mother = req.body.mother;
+        const father = req.body.father;
+        // Call the service to register the user
+        const result = yield (0, allUsersService_1.registerNewStudent)(user, person, student, guardian, contact, mother, father);
+        res.status(201).json(result);
+    }
+    catch (err) {
+        console.error('Error registering Student user:', err);
+        // Send error response
+        res.status(500).json({
+            message: 'Error registering Student user',
+            error: (err instanceof Error) ? err.message : err,
+        });
+    }
+});
+exports.registerStudentUser = registerStudentUser;

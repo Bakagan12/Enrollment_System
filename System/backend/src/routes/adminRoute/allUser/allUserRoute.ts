@@ -6,6 +6,7 @@ const router: Router = Router();
 
 // router.post('/signup', signupValidation, authController.signup);
 
-router.post('/departmental/user',allUser.registerUser );
+router.post('/departmental/user',allUser.registerDepartmentalUser );
+router.post('/student/user',allUser.registerStudentUser );
 
 export default router;

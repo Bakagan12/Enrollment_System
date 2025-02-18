@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerNewDepartmentalUser = void 0;
+exports.registerNewStudent = exports.registerNewDepartmentalUser = void 0;
 const allUsers_1 = require("../../../repository/adminRepository/allUsers");
 // export class allUserService{
 //     static async getAllUsers():Promise<any>{
@@ -32,3 +32,13 @@ const registerNewDepartmentalUser = (person, user) => __awaiter(void 0, void 0, 
     }
 });
 exports.registerNewDepartmentalUser = registerNewDepartmentalUser;
+const registerNewStudent = (user, person, student, guardian, contact, mother, father) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield allUsers_1.allUserRepo.RegisterNewStudent(user, person, student, guardian, contact, mother, father);
+        return { message: 'Student Registered!' };
+    }
+    catch (err) {
+        throw new Error('Error creating Student and Guardian Account: ' + err.message);
+    }
+});
+exports.registerNewStudent = registerNewStudent;

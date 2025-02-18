@@ -37,5 +37,6 @@ const express_1 = require("express");
 const allUser = __importStar(require("../../../controllers/adminController/allUserController/allUserController"));
 const router = (0, express_1.Router)();
 // router.post('/signup', signupValidation, authController.signup);
-router.post('/departmental/user', allUser.registerUser);
+router.post('/departmental/user', allUser.registerDepartmentalUser);
+router.post('/student/user', allUser.registerStudentUser);
 exports.default = router;
