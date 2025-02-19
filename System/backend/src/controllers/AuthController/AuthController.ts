@@ -15,10 +15,10 @@ export const signup = async (req: Request, res: Response, next: NextFunction): P
         return;
     }
 
-    const { person_id, username, password, user_role_id }: { person_id:number; username: string; password: string, user_role_id:number; } = req.body;
+    const { person_id, guardian_id, username, password, user_role_id }: { person_id:number; guardian_id:number, username: string; password: string, user_role_id:number; } = req.body;
 
     try {
-        const result = await userService.createUser(person_id, username, password, user_role_id);
+        const result = await userService.createUser(person_id, guardian_id, username, password, user_role_id);
         res.status(201).json(result);
     } catch (err) {
         const error = err as CustomError;

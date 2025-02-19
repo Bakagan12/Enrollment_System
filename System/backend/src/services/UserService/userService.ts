@@ -8,6 +8,7 @@ const JWT_SECRET: string = config.JWT_SECRET || 'your_jwt_secret';
 interface User {
     id?: string;
     person_id:number;
+    guardian_id:number;
     username: string;
     password: string;
     user_role_id: number;
@@ -16,14 +17,14 @@ interface User {
 }
 
 // Create a new user (Sign up)
-export const createUser = async (person_id: number,username: string, password: string, user_role_id:number, status_id:number = 1 ): Promise<{ message: string }> => {
+export const createUser = async (person_id: number, guardian_id:number,username: string, password: string, user_role_id:number, status_id:number = 1 ): Promise<{ message: string }> => {
     try {
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Save user in the database
         const user: User = {
-            person_id, username, password: hashedPassword, user_role_id, status_id,
+            person_id, guardian_id, username, password: hashedPassword, user_role_id, status_id,
             gen_user_email: ''
         };
         await authRepository.save(user);

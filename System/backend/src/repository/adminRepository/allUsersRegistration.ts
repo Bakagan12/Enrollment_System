@@ -84,7 +84,7 @@ export class allUserRepo{
     }
 
 
-        static async RegisterNewStudent(
+    static async RegisterNewStudent(
             user: GenUser,
             person: Persons,
             student: Student,
@@ -195,6 +195,7 @@ export class allUserRepo{
                     gen_user_email: guardian.email_address,
                     username: guardian_username,
                     password: generatedPassword,
+                    guardian_id:guardianId,
                     user_role_id: user.user_role_id,
                     status_id: user.status_id
                 });

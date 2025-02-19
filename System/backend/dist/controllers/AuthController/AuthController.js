@@ -56,9 +56,9 @@ const signup = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
         res.status(422).json({ errors: errors.array() });
         return;
     }
-    const { person_id, username, password, user_role_id } = req.body;
+    const { person_id, guardian_id, username, password, user_role_id } = req.body;
     try {
-        const result = yield userService.createUser(person_id, username, password, user_role_id);
+        const result = yield userService.createUser(person_id, guardian_id, username, password, user_role_id);
         res.status(201).json(result);
     }
     catch (err) {

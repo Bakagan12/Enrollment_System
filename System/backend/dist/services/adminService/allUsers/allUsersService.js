@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerNewStudent = exports.registerNewDepartmentalUser = void 0;
-const allUsers_1 = require("../../../repository/adminRepository/allUsers");
+const allUsersRegistration_1 = require("../../../repository/adminRepository/allUsersRegistration");
 // export class allUserService{
 //     static async getAllUsers():Promise<any>{
 //         try{
@@ -24,7 +24,7 @@ const allUsers_1 = require("../../../repository/adminRepository/allUsers");
 // }
 const registerNewDepartmentalUser = (person, user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield allUsers_1.allUserRepo.RegisterNewDepartmentalUser(user, person);
+        yield allUsersRegistration_1.allUserRepo.RegisterNewDepartmentalUser(user, person);
         return { message: 'User Registered!' };
     }
     catch (err) {
@@ -34,7 +34,7 @@ const registerNewDepartmentalUser = (person, user) => __awaiter(void 0, void 0, 
 exports.registerNewDepartmentalUser = registerNewDepartmentalUser;
 const registerNewStudent = (user, person, student, guardian, contact, mother, father) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield allUsers_1.allUserRepo.RegisterNewStudent(user, person, student, guardian, contact, mother, father);
+        yield allUsersRegistration_1.allUserRepo.RegisterNewStudent(user, person, student, guardian, contact, mother, father);
         return { message: 'Student Registered!' };
     }
     catch (err) {

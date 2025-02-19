@@ -19,13 +19,13 @@ const config_json_1 = __importDefault(require("../../config/config.json"));
 const auth_1 = require("../../repository/authRepository/auth");
 const JWT_SECRET = config_json_1.default.JWT_SECRET || 'your_jwt_secret';
 // Create a new user (Sign up)
-const createUser = (person_id_1, username_1, password_1, user_role_id_1, ...args_1) => __awaiter(void 0, [person_id_1, username_1, password_1, user_role_id_1, ...args_1], void 0, function* (person_id, username, password, user_role_id, status_id = 1) {
+const createUser = (person_id_1, guardian_id_1, username_1, password_1, user_role_id_1, ...args_1) => __awaiter(void 0, [person_id_1, guardian_id_1, username_1, password_1, user_role_id_1, ...args_1], void 0, function* (person_id, guardian_id, username, password, user_role_id, status_id = 1) {
     try {
         // Hash the password
         const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
         // Save user in the database
         const user = {
-            person_id, username, password: hashedPassword, user_role_id, status_id,
+            person_id, guardian_id, username, password: hashedPassword, user_role_id, status_id,
             gen_user_email: ''
         };
         yield auth_1.authRepository.save(user);

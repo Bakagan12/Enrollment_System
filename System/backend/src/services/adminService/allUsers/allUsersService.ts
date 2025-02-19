@@ -1,5 +1,5 @@
 import  db from "../../../config/db";
-import { allUserRepo } from "../../../repository/adminRepository/allUsers";
+import { allUserRepo } from "../../../repository/adminRepository/allUsersRegistration";
 import { Persons } from "../../../models/persons";
 import { GenUser } from "../../../models/genUser";
 import { StudentGuardian } from "../../../models/studenGuardian";
