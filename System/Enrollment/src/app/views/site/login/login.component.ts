@@ -30,9 +30,17 @@ export class LoginComponent {
       this.authService.login(username, password).subscribe(
         (response) => {
           console.log('Login successful:', response);
+          // You can also store the username and token in localStorage if needed
           localStorage.setItem('auth_token', response.token);
           localStorage.setItem('username', username);
-          this.router.navigate(['/submain/dashboard']);
+
+          // If the backend sends a `redirectUrl`, navigate to it, otherwise default to `/dashboard`
+          const redirectUrl = response.redirectUrl || '/homepage';
+          this.router.navigate([redirectUrl]);
+          // console.log('Login successful:', response);
+          // localStorage.setItem('auth_token', response.token);
+          // localStorage.setItem('username', username);
+          // this.router.navigate(['/submain/dashboard']);
         },
         (error) => {
           // Handle errors from the server

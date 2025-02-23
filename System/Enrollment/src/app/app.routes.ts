@@ -25,12 +25,14 @@ export const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
   {path: 'homepage', component: LandingPageComponent},
   { path: 'auth/login', component: LoginComponent },
-  { path: 'dashboard', component: DefaultDashboardComponent, canActivate: [AuthGuard] },
+  // { path: 'dashboard', component: DefaultDashboardComponent, canActivate: [AuthGuard] },
   { path: 'auth/logout', component: DefaultDashboardComponent, pathMatch: 'full',
     resolve: { logout: AuthService } },
     { path: 'about', component: AboutComponent },
   { path: 'programs', component: ProgramsComponent },
   { path: 'contact-details', component: ContactDetailsComponent },
+
+  //Technical or Admin Page
   { path: 'submain/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 
   //Online Register

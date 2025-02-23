@@ -9,20 +9,20 @@ interface CustomError extends Error {
 
 //Define routes on every role
 const roleRoutes: { [key: number]: string } = {
-    1: '/dashboard',           // Admin
-    2: '/owner',               // Owner
-    3: '/principal',           // Principal
-    4: '/principal',           // Assistant Principal
-    5: '/registrar',           // Registrar
-    6: '/registrar',           // Assistant Registrar
-    7: '/accounting',          // Accountancy
-    8: '/accounting',          // Assistant Accountancy
-    9: '/guidance',            // Guidance Counselor
-    10: '/guidance',           // Assistant Guidance Counselor
-    11: '/nurse',              // Nurse
-    12: '/student',            // Student
-    13: '/guardian',           // Guardian
-    14: '/teacher',            // Teacher
+    1: '/submain/dashboard',
+    2: '/owner',
+    3: '/principal',
+    4: '/principal',
+    5: '/registrar',
+    6: '/registrar',
+    7: '/accounting',
+    8: '/accounting',
+    9: '/guidance',
+    10: '/guidance',
+    11: '/nurse',
+    12: '/student',
+    13: '/guardian',
+    14: '/teacher'
 };
 
 //Login
@@ -54,7 +54,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
         const token = userService.generateToken(user);
 
         // Get the role route based on the user's role
-        const redirectUrl = roleRoutes[user.user_role_id] || '/auth/login';
+        const redirectUrl = roleRoutes[user.user_role_id] || '/homepage';
 
         // Send response with token and redirect URL
         res.json({
@@ -93,47 +93,6 @@ export const signup = async (req: Request, res: Response, next: NextFunction): P
         next(error);
     }
 };
-
-// Login
-// export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//         res.status(422).json({ errors: errors.array() });
-//         return;
-//     }
-
-//     const { username, password }: { username: string; password: string } = req.body;
-
-//     try {
-//         const user = await userService.findUserByUsername(username);
-
-//         if (!user) {
-//             res.status(401).json({ message: 'Invalid username' });
-//             return;
-//         }
-
-//         const isMatch = await bcrypt.compare(password, user.password);
-
-//         if (!isMatch) {
-//             res.status(401).json({ message: 'Invalid password' });
-//             return;
-//         }
-
-//         const token = userService.generateToken(user);
-
-//         res.json({
-//             message: 'Login successful',
-//             token,
-//             redirectUrl: '/dashboard',
-//         });
-//     } catch (err) {
-//         const error = err as CustomError;
-//         if (!error.statusCode) {
-//             error.statusCode = 500;
-//         }
-//         next(error);
-//     }
-// };
 
 // Logout
 export const logout = (req: Request, res: Response): void => {

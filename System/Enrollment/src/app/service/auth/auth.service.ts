@@ -20,20 +20,25 @@ export class AuthService {
     return this.login(username, password).pipe(
       tap((response) => {
         if (response && response.token) {
+          // Store the JWT token and username in localStorage
           localStorage.setItem('auth_token', response.token);
           localStorage.setItem('username', username);
-          this.router.navigate(['/dashboard']);
+
+          // Handle the redirect URL from the backend
+          const redirectUrl = response.redirectUrl || '/homepage';
+          this.router.navigate([redirectUrl]);
         }
       })
     );
   }
+
   logout(): void {
-    // Remove token and username from localStorage
     localStorage.removeItem('auth_token');
     localStorage.removeItem('username');
 
     this.router.navigate(['/auth/login']);
   }
+
   isLoggedIn(): boolean {
     return !!localStorage.getItem('auth_token');
   }

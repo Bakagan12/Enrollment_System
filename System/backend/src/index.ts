@@ -29,7 +29,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use('/auth', authRoutes);
 app.use('/register', roleAuth([1]), departmentalUsers);  // Only Admin can access
 app.use('/admin', roleAuth([1, 2]), selectUserRoute);     // Only Admin and Owner can access
-app.use('/principal', roleAuth([3, 4]), termRoute); 
+app.use('/principal', roleAuth([3, 4]), termRoute);
 
 // Error handling middleware
 app.use(errorController.get404);

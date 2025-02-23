@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose Enrollment Type</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans flex items-center justify-center h-screen">
+
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-3xl font-semibold text-center mb-6">Choose Enrollment Type</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+      <!-- New Student Image and Button -->
+      <div class="choice-item text-center cursor-pointer" onclick="window.location.href='new-student-form.html';">
+        <img src="2.png" alt="New Student" class="mx-auto mb-4 w-24 h-24 object-contain">
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">New Student</button>
+      </div>
+
+      <!-- Old Student Image and Button -->
+      <div class="choice-item text-center cursor-pointer" onclick="window.location.href='old-info.html';">
+        <img src="1.png" alt="Old Student" class="mx-auto mb-4 w-24 h-24 object-contain">
+        <button class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition">Old Student</button>
+      </div>
+
+      <!-- Returnee Image and Button -->
+      <div class="choice-item text-center cursor-pointer" onclick="window.location.href='returnee-form.html';">
+        <img src="3.png" alt="Returnee" class="mx-auto mb-4 w-24 h-24 object-contain">
+        <button class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition">Returnee</button>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
