@@ -13,7 +13,11 @@ import {StaffDashboardComponent} from './views/site/staffPage/dashboard/dashboar
 import {UserRolesComponent} from './views/site/adminPage/user-roles/user-roles.component';
 import {AnnouncementComponent} from './views/site/adminPage/announcements/announcements.component';
 import {ReportsComponent} from './views/site/adminPage/reports/reports.component';
-import {OnlineRegistrationComponent} from './views/site/onlineRegistration/online-registration/online-registration.component';
+import { ClassificationComponent } from './views/site/online_registration/classification/classification.component';
+import { Form1Component } from './views/site/online_registration/highschool_form/form1/form1.component';
+import { Form2Component } from './views/site/online_registration/highschool_form/form2/form2.component';
+import { Form3Component } from './views/site/online_registration/highschool_form/form3/form3.component';
+import { Form4Component } from './views/site/online_registration/highschool_form/form4/form4.component';
 
 export const routes: Routes = [
 
@@ -30,7 +34,11 @@ export const routes: Routes = [
   { path: 'submain/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 
   //Online Register
-  {path: 'online_registration', component: OnlineRegistrationComponent},
+  {path: 'online_registration', component: ClassificationComponent},
+  {path: 'online_registration/kidner_elementary/form1', component: Form1Component},
+  {path: 'online_registration/kidner_elementary/form2', component: Form2Component},
+  {path: 'online_registration/kidner_elementary/form3', component: Form3Component},
+  {path: 'online_registration/kidner_elementary/form4', component: Form4Component},
 
   //Admin
   { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },

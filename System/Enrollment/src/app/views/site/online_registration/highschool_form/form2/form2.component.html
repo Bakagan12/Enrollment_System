@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Student Enrollment</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <app-header></app-header>
+  <br><br>
+  <div class="max-w-3xl mx-auto bg-white p-8 shadow-md rounded-md mt-10">
+    <h3 class="text-2xl font-semibold mb-6 text-center">Parent's/Guardian's Information</h3>
+
+    <form id="parent-form" class="space-y-6">
+      <!-- Father's Information -->
+      <h4 class="text-xl font-medium">Father's Information</h4>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="flex flex-col">
+          <label for="father-name" class="mb-2 text-gray-700">Father's Name</label>
+          <input type="text" id="father-name" placeholder="Father's Full Name" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="father-contact" class="mb-2 text-gray-700">Contact Number</label>
+          <input type="tel" id="father-contact" placeholder="Father's Contact Number" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="father-address" class="mb-2 text-gray-700">Complete Home Address</label>
+        <input type="text" id="father-address" placeholder="Father's Home Address" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="flex flex-col">
+          <label for="father-age" class="mb-2 text-gray-700">Age</label>
+          <input type="number" id="father-age" placeholder="Father's Age" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="father-occupation" class="mb-2 text-gray-700">Occupation</label>
+          <input type="text" id="father-occupation" placeholder="Father's Occupation" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+      </div>
+
+      <!-- Mother's Information -->
+      <h4 class="text-xl font-medium mt-8">Mother's Information</h4>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="flex flex-col">
+          <label for="mother-name" class="mb-2 text-gray-700">Mother's Name</label>
+          <input type="text" id="mother-name" placeholder="Mother's Full Name" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="mother-contact" class="mb-2 text-gray-700">Contact Number</label>
+          <input type="tel" id="mother-contact" placeholder="Mother's Contact Number" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="mother-address" class="mb-2 text-gray-700">Complete Home Address</label>
+        <input type="text" id="mother-address" placeholder="Mother's Home Address" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="flex flex-col">
+          <label for="mother-age" class="mb-2 text-gray-700">Age</label>
+          <input type="number" id="mother-age" placeholder="Mother's Age" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="mother-occupation" class="mb-2 text-gray-700">Occupation</label>
+          <input type="text" id="mother-occupation" placeholder="Mother's Occupation" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+      </div>
+
+      <!-- Submit and Back Buttons -->
+      <div class="flex justify-between mt-8">
+        <a routerLink="/online_registration/kidner_elementary/form1" class="text-white bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-md text-sm font-medium">Previous</a>
+        <a routerLink="/online_registration/kidner_elementary/form3" class="text-white bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-md text-sm font-medium">Next</a>
+      </div>
+
+    </form>
+  </div>
+  <br><br>
+  <app-footer></app-footer>
+</body>
+</html>

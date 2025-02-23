@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Student Enrollment</title>
+</head>
+<body class="bg-gray-100">
+  <app-header></app-header>
+  <!-- Increase margin-top to create more spacing below the header -->
+   <br>
+   <br>
+  <div class="max-w-3xl mx-auto bg-white p-8 shadow-md rounded-md mt-16">
+    <h3 class="text-2xl font-semibold mb-6 text-center">In Case of Emergency, Please Notify</h3>
+
+    <form id="emergency-form" class="space-y-6">
+      <!-- Emergency Contact -->
+      <div class="flex flex-col">
+        <label for="emergency-contact" class="mb-2 text-gray-700">Contact Person</label>
+        <input type="text" id="emergency-contact" placeholder="Emergency Contact Person" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="emergency-relationship" class="mb-2 text-gray-700">Relationship</label>
+        <input type="text" id="emergency-relationship" placeholder="Relationship to Student" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="emergency-address" class="mb-2 text-gray-700">Address</label>
+        <input type="text" id="emergency-address" placeholder="Emergency Contact Address" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="emergency-number" class="mb-2 text-gray-700">Contact Number</label>
+        <input type="tel" id="emergency-number" placeholder="Emergency Contact Number" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <!-- Submit and Back Buttons -->
+      <div class="flex justify-between mt-8">
+        <a routerLink="/online_registration/kidner_elementary/form3" class="text-white bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-md text-sm font-medium">Previous</a>
+        <a routerLink="/online_registration" class="text-white bg-green-500 hover:bg-green-600 px-6 py-2 rounded-md text-sm font-medium">Submit</a>
+      </div>
+
+    </form>
+  </div>
+  <br><br>
+  <app-footer></app-footer>
+</body>
+</html>

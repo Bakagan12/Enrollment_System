@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Student Enrollment</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <app-header></app-header>
+  <br>
+  <br>
+  <div class="max-w-3xl mx-auto bg-white p-8 shadow-md rounded-md mt-10">
+    <h3 class="text-2xl font-semibold mb-6 text-center">To Be Filled Out If the Learner Is Not Living with Parents</h3>
+
+    <form id="guardian-form" class="space-y-6">
+      <!-- Legal Guardian Information -->
+      <div class="flex flex-col">
+        <label for="guardian-name" class="mb-2 text-gray-700">Name of Legal Guardian</label>
+        <input type="text" id="guardian-name" placeholder="Guardian's Full Name" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="relationship" class="mb-2 text-gray-700">Relationship</label>
+        <input type="text" id="relationship" placeholder="Relationship to Student" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="guardian-address" class="mb-2 text-gray-700">Complete Home Address</label>
+        <input type="text" id="guardian-address" placeholder="Guardian's Home Address" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="guardian-contact" class="mb-2 text-gray-700">Contact Number</label>
+        <input type="tel" id="guardian-contact" placeholder="Guardian's Contact Number" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="guardian-occupation" class="mb-2 text-gray-700">Guardian's Occupation</label>
+        <input type="text" id="guardian-occupation" placeholder="Guardian's Occupation" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="workplace-address" class="mb-2 text-gray-700">Complete Workplace Address</label>
+        <input type="text" id="workplace-address" placeholder="Workplace Address" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <!-- Submit and Back Buttons -->
+      <div class="flex justify-between mt-8">
+        <a routerLink="/online_registration/kidner_elementary/form2" class="text-white bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-md text-sm font-medium">Previous</a>
+        <a routerLink="/online_registration/kidner_elementary/form4" class="text-white bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-md text-sm font-medium">Next</a>
+      </div>
+
+    </form>
+  </div>
+  <br><br>
+  <app-footer></app-footer>
+</body>
+</html>

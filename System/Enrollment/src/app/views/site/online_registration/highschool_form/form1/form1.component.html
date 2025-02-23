@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Student Enrollment</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <app-header></app-header>
+  <br><br>
+  <div class="max-w-3xl mx-auto bg-white p-8 shadow-md rounded-md mt-10">
+    <h2 class="text-2xl font-semibold mb-6 text-center">New Student Enrollment</h2>
+
+    <form id="new-student-form" class="space-y-6">
+      <!-- Student Information -->
+      <h3 class="text-xl font-medium">Student Information</h3>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="flex flex-col">
+          <label for="first-name" class="mb-2 text-gray-700">First Name</label>
+          <input type="text" id="first-name" placeholder="First Name" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="last-name" class="mb-2 text-gray-700">Last Name</label>
+          <input type="text" id="last-name" placeholder="Last Name" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="flex flex-col">
+          <label for="middle-name" class="mb-2 text-gray-700">Middle Name</label>
+          <input type="text" id="middle-name" placeholder="Middle Name" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="suffix" class="mb-2 text-gray-700">Suffix</label>
+          <input type="text" id="suffix" placeholder="Suffix (Jr, Sr, I... )" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="flex flex-col">
+          <label for="age" class="mb-2 text-gray-700">Age</label>
+          <input type="number" id="age" placeholder="Age" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="birthdate" class="mb-2 text-gray-700">Birthdate</label>
+          <input type="date" id="birthdate" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="birth-place" class="mb-2 text-gray-700">Birth Place</label>
+        <input type="text" id="birth-place" placeholder="Place of Birth" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="address" class="mb-2 text-gray-700">Complete Home Address</label>
+        <input type="text" id="address" placeholder="Complete Address" class="border border-gray-300 p-2 rounded-md" required>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="flex flex-col">
+          <label for="contact-number" class="mb-2 text-gray-700">Contact Number</label>
+          <input type="tel" id="contact-number" placeholder="Contact Number" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+
+        <div class="flex flex-col">
+          <label for="grade-level" class="mb-2 text-gray-700">Grade Level to Enroll</label>
+          <input type="text" id="grade-level" placeholder="Grade Level" class="border border-gray-300 p-2 rounded-md" required>
+        </div>
+      </div>
+
+      <!-- Submit and Back Buttons -->
+      <div class="flex justify-between mt-6">
+        <a routerLink="/online_registration" class="text-white bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-md text-sm font-medium">Back</a>
+        <a routerLink="/online_registration/kidner_elementary/form2" class="text-white bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-md text-sm font-medium">Next</a>
+      </div>
+    </form>
+  </div>
+  <br><br>
+  <app-footer></app-footer>
+</body>
+</html>

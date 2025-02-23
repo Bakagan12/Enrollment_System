@@ -47,6 +47,7 @@ const termRoute_1 = __importDefault(require("./routes/departmental_usersRoute/pr
 const errorController = __importStar(require("./controllers/error/error"));
 const database_1 = require("./util/database");
 Object.defineProperty(exports, "testDbConnection", { enumerable: true, get: function () { return database_1.testDbConnection; } });
+const roleAuth_1 = require("./middleware/roleAuth");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -62,9 +63,9 @@ app.use((req, res, next) => {
 });
 // Define the routes
 app.use('/auth', authRoutes_1.default);
-app.use('/register', allUserRoute_1.default);
-app.use('/admin', selectUserRoute_1.default);
-app.use('/principal', termRoute_1.default);
+app.use('/register', (0, roleAuth_1.roleAuth)([1]), allUserRoute_1.default); // Only Admin can access
+app.use('/admin', (0, roleAuth_1.roleAuth)([1, 2]), selectUserRoute_1.default); // Only Admin and Owner can access
+app.use('/principal', (0, roleAuth_1.roleAuth)([3, 4]), termRoute_1.default);
 // Error handling middleware
 app.use(errorController.get404);
 app.use(errorController.get500);

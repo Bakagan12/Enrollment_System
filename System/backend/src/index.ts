@@ -7,6 +7,7 @@ import selectUserRoute from './routes/adminRoute/selectRoute/selectUserRoute';
 import termRoute from './routes/departmental_usersRoute/principal/termRoute';
 import * as errorController from './controllers/error/error';
 import { testDbConnection } from './util/database';
+import { roleAuth } from './middleware/roleAuth';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -26,9 +27,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // Define the routes
 app.use('/auth', authRoutes);
-app.use('/register', departmentalUsers);
-app.use('/admin', selectUserRoute);
-app.use('/principal',termRoute );
+app.use('/register', roleAuth([1]), departmentalUsers);  // Only Admin can access
+app.use('/admin', roleAuth([1, 2]), selectUserRoute);     // Only Admin and Owner can access
+app.use('/principal', roleAuth([3, 4]), termRoute); 
 
 // Error handling middleware
 app.use(errorController.get404);

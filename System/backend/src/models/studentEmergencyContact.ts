@@ -23,5 +23,4 @@ export class StudentEmergencyContact{
         this.contact_no = contact_no,
         this.email_address = email_address
     }
-
 }

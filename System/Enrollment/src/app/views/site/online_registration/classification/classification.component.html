@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choices UI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen flex items-center justify-center bg-gray-100">
+ <app-header></app-header>
+  <div class="text-center space-y-6">
+    <h1 class="text-3xl font-bold text-gray-800">Choose Your Level</h1>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <!-- Elementary Choice -->
+      <a routerLink="/online_registration/kidner_elementary/form1" class="block p-6 max-w-sm bg-blue-500 text-white rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
+        <h2 class="text-2xl font-semibold">Kinder | Elementary</h2>
+        <p class="mt-2">Start your learning journey here!</p>
+      </a>
+
+      <!-- High School Choice -->
+      <a routerLink="/online_registration/kidner_elementary/form1" class="block p-6 max-w-sm bg-green-500 text-white rounded-2xl shadow-lg transform hover:scale-105 transition-transform">
+        <h2 class="text-2xl font-semibold">High School</h2>
+        <p class="mt-2">Prepare for the next level!</p>
+      </a>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</body>
+</html>
+

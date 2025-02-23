@@ -45,10 +45,66 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logout = exports.login = exports.signup = void 0;
+exports.logout = exports.signup = exports.login = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const express_validator_1 = require("express-validator");
 const userService = __importStar(require("../../services/UserService/userService"));
+//Define routes on every role
+const roleRoutes = {
+    1: '/dashboard', // Admin
+    2: '/owner', // Owner
+    3: '/principal', // Principal
+    4: '/principal', // Assistant Principal
+    5: '/registrar', // Registrar
+    6: '/registrar', // Assistant Registrar
+    7: '/accounting', // Accountancy
+    8: '/accounting', // Assistant Accountancy
+    9: '/guidance', // Guidance Counselor
+    10: '/guidance', // Assistant Guidance Counselor
+    11: '/nurse', // Nurse
+    12: '/student', // Student
+    13: '/guardian', // Guardian
+    14: '/teacher', // Teacher
+};
+//Login
+const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const errors = (0, express_validator_1.validationResult)(req);
+    if (!errors.isEmpty()) {
+        res.status(422).json({ errors: errors.array() });
+        return;
+    }
+    const { username, password } = req.body;
+    try {
+        const user = yield userService.findUserByUsername(username);
+        if (!user) {
+            res.status(401).json({ message: 'Invalid username' });
+            return;
+        }
+        const isMatch = yield bcryptjs_1.default.compare(password, user.password);
+        if (!isMatch) {
+            res.status(401).json({ message: 'Invalid password' });
+            return;
+        }
+        // Generate JWT token with user data and role
+        const token = userService.generateToken(user);
+        // Get the role route based on the user's role
+        const redirectUrl = roleRoutes[user.user_role_id] || '/default-route';
+        // Send response with token and redirect URL
+        res.json({
+            message: 'Login successful',
+            token,
+            redirectUrl,
+        });
+    }
+    catch (err) {
+        const error = err;
+        if (!error.statusCode) {
+            error.statusCode = 500;
+        }
+        next(error);
+    }
+});
+exports.login = login;
 // Sign up
 const signup = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const errors = (0, express_validator_1.validationResult)(req);
@@ -71,40 +127,38 @@ const signup = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.signup = signup;
 // Login
-const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const errors = (0, express_validator_1.validationResult)(req);
-    if (!errors.isEmpty()) {
-        res.status(422).json({ errors: errors.array() });
-        return;
-    }
-    const { username, password } = req.body;
-    try {
-        const user = yield userService.findUserByUsername(username);
-        if (!user) {
-            res.status(401).json({ message: 'Invalid username' });
-            return;
-        }
-        const isMatch = yield bcryptjs_1.default.compare(password, user.password);
-        if (!isMatch) {
-            res.status(401).json({ message: 'Invalid password' });
-            return;
-        }
-        const token = userService.generateToken(user);
-        res.json({
-            message: 'Login successful',
-            token,
-            redirectUrl: '/dashboard',
-        });
-    }
-    catch (err) {
-        const error = err;
-        if (!error.statusCode) {
-            error.statusCode = 500;
-        }
-        next(error);
-    }
-});
-exports.login = login;
+// export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//         res.status(422).json({ errors: errors.array() });
+//         return;
+//     }
+//     const { username, password }: { username: string; password: string } = req.body;
+//     try {
+//         const user = await userService.findUserByUsername(username);
+//         if (!user) {
+//             res.status(401).json({ message: 'Invalid username' });
+//             return;
+//         }
+//         const isMatch = await bcrypt.compare(password, user.password);
+//         if (!isMatch) {
+//             res.status(401).json({ message: 'Invalid password' });
+//             return;
+//         }
+//         const token = userService.generateToken(user);
+//         res.json({
+//             message: 'Login successful',
+//             token,
+//             redirectUrl: '/dashboard',
+//         });
+//     } catch (err) {
+//         const error = err as CustomError;
+//         if (!error.statusCode) {
+//             error.statusCode = 500;
+//         }
+//         next(error);
+//     }
+// };
 // Logout
 const logout = (req, res) => {
     res.json({ message: 'Logged out successfully' });
