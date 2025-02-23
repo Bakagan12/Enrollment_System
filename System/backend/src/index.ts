@@ -2,8 +2,9 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import authRoutes from './routes/authRoute/authRoutes';
-import  departmentalUsers from './routes/adminRoute/allUser/allUserRoute'
-import selectUserRoute from './routes/adminRoute/selectRoute/selectUserRoute'
+import  departmentalUsers from './routes/adminRoute/allUser/allUserRoute';
+import selectUserRoute from './routes/adminRoute/selectRoute/selectUserRoute';
+import termRoute from './routes/departmental_usersRoute/principal/termRoute';
 import * as errorController from './controllers/error/error';
 import { testDbConnection } from './util/database';
 import dotenv from 'dotenv';
@@ -27,6 +28,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use('/auth', authRoutes);
 app.use('/register', departmentalUsers);
 app.use('/admin', selectUserRoute);
+app.use('/principal',termRoute );
 
 // Error handling middleware
 app.use(errorController.get404);

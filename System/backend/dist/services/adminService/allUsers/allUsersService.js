@@ -11,17 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerNewStudent = exports.registerNewDepartmentalUser = void 0;
 const allUsersRegistration_1 = require("../../../repository/adminRepository/allUsersRegistration");
-// export class allUserService{
-//     static async getAllUsers():Promise<any>{
-//         try{
-//             const user = await allUserRepo.findAllUsers();
-//             return user;
-//         }catch(err){
-//             console.error('Error fecthing all users:', err);
-//             throw err;
-//         }
-//     }
-// }
 const registerNewDepartmentalUser = (person, user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield allUsersRegistration_1.allUserRepo.RegisterNewDepartmentalUser(user, person);

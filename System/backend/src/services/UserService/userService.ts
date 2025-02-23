@@ -6,7 +6,7 @@ import { authRepository } from '../../repository/authRepository/auth';
 const JWT_SECRET: string = config.JWT_SECRET || 'your_jwt_secret';
 
 interface User {
-    id?: string;
+    id?: number;
     person_id:number;
     guardian_id:number;
     username: string;
@@ -14,18 +14,27 @@ interface User {
     user_role_id: number;
     gen_user_email: string;
     status_id: number;
+    is_emailed:boolean;
+    is_deleted:number;
+    is_deleted_by:number;
 }
 
-// Create a new user (Sign up)
-export const createUser = async (person_id: number, guardian_id:number,username: string, password: string, user_role_id:number, status_id:number = 1 ): Promise<{ message: string }> => {
+// Create a new user (register)
+export const createUser = async (person_id: number, guardian_id:number,username: string, password: string, user_role_id:number, status_id:number = 1, is_emaild: boolean, is_deleted:number, is_deleted_by:number ): Promise<{ message: string }> => {
     try {
-        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Save user in the database
         const user: User = {
-            person_id, guardian_id, username, password: hashedPassword, user_role_id, status_id,
-            gen_user_email: ''
+            person_id,
+            guardian_id,
+            username,
+            password: hashedPassword,
+            user_role_id, status_id,
+            gen_user_email: '',
+            is_emailed: false,
+            is_deleted: 0,
+            is_deleted_by: 0
         };
         await authRepository.save(user);
 
@@ -35,17 +44,14 @@ export const createUser = async (person_id: number, guardian_id:number,username:
     }
 };
 
-// Find a user by username (for login)
 export const findUserByUsername = async (username: string): Promise<User | null> => {
     try {
         const result = await authRepository.find(username);
 
-        // Check if the result is empty or undefined
         if (!result || result.length === 0) {
-            return null;  // No user found
+            return null;
         }
 
-        // Return the first user in the result (assuming the query returns an array of users)
         return result;
     } catch (err) {
         throw new Error('Error finding user: ' + (err as Error).message);
@@ -53,7 +59,6 @@ export const findUserByUsername = async (username: string): Promise<User | null>
 };
 
 
-// Generate JWT token after successful login
 export const generateToken = (user: User): string => {
     return jwt.sign(
         { id: user.id, username: user.username },

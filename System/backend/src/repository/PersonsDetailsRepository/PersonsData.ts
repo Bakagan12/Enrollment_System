@@ -1,5 +1,5 @@
 import { Persons } from '../../models/persons';
-import db from '../../util/database'; // The Knex instance
+import db from '../../util/database';
 
 export class PersonDataRepository {
 

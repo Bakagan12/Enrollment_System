@@ -1,4 +1,3 @@
-import  db from "../../../config/db";
 import { allUserRepo } from "../../../repository/adminRepository/allUsersRegistration";
 import { Persons } from "../../../models/persons";
 import { GenUser } from "../../../models/genUser";
@@ -8,19 +7,7 @@ import { Father } from "../../../models/father";
 import { StudentEmergencyContact } from "../../../models/studentEmergencyContact";
 import { Student } from "../../../models/students";
 import { StudentMedicalHistory } from "../../../models/studentMedicalHistory";
-import { v4 as uuidv4 } from 'uuid';
 
-// export class allUserService{
-//     static async getAllUsers():Promise<any>{
-//         try{
-//             const user = await allUserRepo.findAllUsers();
-//             return user;
-//         }catch(err){
-//             console.error('Error fecthing all users:', err);
-//             throw err;
-//         }
-//     }
-// }
 export const registerNewDepartmentalUser = async (person: Persons,  user: GenUser): Promise<{ message: string }> => {
     try {
         await allUserRepo.RegisterNewDepartmentalUser(user, person);
