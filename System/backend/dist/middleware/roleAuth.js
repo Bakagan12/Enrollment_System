@@ -21,6 +21,10 @@ const roleAuth = (allowedRoles) => {
                 res.status(403).json({ message: 'Access denied' });
                 return;
             }
+            // Added role-based check here
+            if (allowedRoles.includes(decoded.role)) {
+                console.log('User has required role');
+            }
             next();
         }
         catch (err) {

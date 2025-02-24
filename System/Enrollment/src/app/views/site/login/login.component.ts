@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../service/auth/auth.service';
 import { FooterComponent } from '../adminPage/admin-dashboard/footer/footer.component';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FooterComponent],
+  imports: [ReactiveFormsModule, CommonModule, FooterComponent, RouterModule],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {

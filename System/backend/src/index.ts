@@ -5,6 +5,7 @@ import authRoutes from './routes/authRoute/authRoutes';
 import  departmentalUsers from './routes/adminRoute/allUser/allUserRoute';
 import selectUserRoute from './routes/adminRoute/selectRoute/selectUserRoute';
 import termRoute from './routes/departmental_usersRoute/principal/termRoute';
+import emailRoute from './routes/emailRoute/emailRoute'
 import * as errorController from './controllers/error/error';
 import { testDbConnection } from './util/database';
 import { roleAuth } from './middleware/roleAuth';
@@ -28,8 +29,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 // Define the routes
 app.use('/auth', authRoutes);
 app.use('/register', roleAuth([1]), departmentalUsers);  // Only Admin can access
-app.use('/admin', roleAuth([1, 2]), selectUserRoute);     // Only Admin and Owner can access
+app.use('/admin', roleAuth([1]), selectUserRoute);     // Only Admin and Owner can access
 app.use('/principal', roleAuth([3, 4]), termRoute);
+
+//for email configutration
+app.use('/email', emailRoute);
 
 // Error handling middleware
 app.use(errorController.get404);

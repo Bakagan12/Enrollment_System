@@ -27,6 +27,10 @@ export const roleAuth = (allowedRoles: number[]) => {
                 res.status(403).json({ message: 'Access denied' });
                 return;
             }
+            // Added role-based check here
+            if (allowedRoles.includes(decoded.role)) {
+                console.log('User has required role');
+            }
             next();
         } catch (err) {
             res.status(403).json({ message: 'Invalid token' });

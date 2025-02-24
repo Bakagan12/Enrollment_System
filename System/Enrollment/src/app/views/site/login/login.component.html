@@ -3,7 +3,7 @@
     <h1 class="text-white text-2xl">Sta. Cruz Learning Center</h1>
     <nav>
       <ul class="flex gap-4">
-        <li><a href="#home" class="text-white hover:bg-[#2e79ba] px-4 py-2 rounded">Home</a></li>
+        <li><a routerLink="/homepage" class="text-white hover:bg-[#2e79ba] px-4 py-2 rounded">Home</a></li>
       </ul>
     </nav>
   </div>
@@ -56,8 +56,7 @@
       <!-- Forgot Password and Login Row -->
       <div class="flex justify-between items-center mb-4">
         <!-- Forgot Password Link -->
-        <a href="#" class="text-white-700 hover:text-cyan-900 text-sm">Forgot Password?</a>
-
+        <a [routerLink]="['/forgot/password']" class="text-white-700 hover:text-cyan-900 text-sm">Forgot Password?</a>
         <!-- Login Button -->
         <button
           type="submit"

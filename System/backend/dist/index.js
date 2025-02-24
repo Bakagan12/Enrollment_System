@@ -44,6 +44,7 @@ const authRoutes_1 = __importDefault(require("./routes/authRoute/authRoutes"));
 const allUserRoute_1 = __importDefault(require("./routes/adminRoute/allUser/allUserRoute"));
 const selectUserRoute_1 = __importDefault(require("./routes/adminRoute/selectRoute/selectUserRoute"));
 const termRoute_1 = __importDefault(require("./routes/departmental_usersRoute/principal/termRoute"));
+const emailRoute_1 = __importDefault(require("./routes/emailRoute/emailRoute"));
 const errorController = __importStar(require("./controllers/error/error"));
 const database_1 = require("./util/database");
 Object.defineProperty(exports, "testDbConnection", { enumerable: true, get: function () { return database_1.testDbConnection; } });
@@ -64,8 +65,10 @@ app.use((req, res, next) => {
 // Define the routes
 app.use('/auth', authRoutes_1.default);
 app.use('/register', (0, roleAuth_1.roleAuth)([1]), allUserRoute_1.default); // Only Admin can access
-app.use('/admin', (0, roleAuth_1.roleAuth)([1, 2]), selectUserRoute_1.default); // Only Admin and Owner can access
+app.use('/admin', (0, roleAuth_1.roleAuth)([1]), selectUserRoute_1.default); // Only Admin and Owner can access
 app.use('/principal', (0, roleAuth_1.roleAuth)([3, 4]), termRoute_1.default);
+//for email configutration
+app.use('/email', emailRoute_1.default);
 // Error handling middleware
 app.use(errorController.get404);
 app.use(errorController.get500);
