@@ -39,8 +39,7 @@ export const routes: Routes = [
   { path: 'programs', component: ProgramsComponent },
   { path: 'contact-details', component: ContactDetailsComponent },
 
-  //Technical or Admin Page
-  { path: 'submain/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+
 
   //Online Register
   {path: 'online_registration', component: ClassificationComponent},
@@ -48,6 +47,14 @@ export const routes: Routes = [
   {path: 'online_registration/kidner_elementary/form2', component: Form2Component},
   {path: 'online_registration/kidner_elementary/form3', component: Form3Component},
   {path: 'online_registration/kidner_elementary/form4', component: Form4Component},
+
+//Technical or Admin Page
+  { path: 'submain',
+    data:{user_role_id:[1]},
+    canActivate: [AuthGuard],
+  children:[
+    {path: 'dashboard',component: DashboardComponent,}
+  ] },
 
   {
     path: 'admin',
