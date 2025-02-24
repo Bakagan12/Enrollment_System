@@ -61,7 +61,7 @@ export const findUserByUsername = async (username: string): Promise<User | null>
 
 export const generateToken = (user: User): string => {
     return jwt.sign(
-        { id: user.id, username: user.username },
+        { id: user.id, username: user.username, user_role_id: user.user_role_id },
         JWT_SECRET,
         { expiresIn: '1h' }
     );

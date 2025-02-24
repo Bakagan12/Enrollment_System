@@ -10,19 +10,19 @@ interface CustomError extends Error {
 //Define routes on every role
 const roleRoutes: { [key: number]: string } = {
     1: '/submain/dashboard',
-    2: '/owner',
-    3: '/principal',
-    4: '/principal',
-    5: '/registrar',
-    6: '/registrar',
-    7: '/accounting',
-    8: '/accounting',
-    9: '/guidance',
-    10: '/guidance',
-    11: '/nurse',
-    12: '/student',
-    13: '/guardian',
-    14: '/teacher'
+    2: '/owner/dashboard',
+    3: '/principal/dashboard',
+    4: '/principal/dashboard',
+    5: '/registrar/dashboard',
+    6: '/registrar/dashboard',
+    7: '/cashier/dashboard',
+    8: '/cashier/dashboard',
+    9: '/guidance/dashboard',
+    10: '/guidance/dashboard',
+    11: '/clinic/dashboard',
+    12: '/student/dashboard',
+    13: '/guardian/dashboard',
+    14: '/teacher/dashboard'
 };
 
 //Login
@@ -60,6 +60,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
         res.json({
             message: 'Login successful',
             token,
+            user_role_id:user.user_role_id,
             redirectUrl,
         });
     } catch (err) {

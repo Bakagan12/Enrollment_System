@@ -56,6 +56,6 @@ const findUserByUsername = (username) => __awaiter(void 0, void 0, void 0, funct
 });
 exports.findUserByUsername = findUserByUsername;
 const generateToken = (user) => {
-    return jsonwebtoken_1.default.sign({ id: user.id, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
+    return jsonwebtoken_1.default.sign({ id: user.id, username: user.username, user_role_id: user.user_role_id }, JWT_SECRET, { expiresIn: '1h' });
 };
 exports.generateToken = generateToken;

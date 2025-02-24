@@ -6,7 +6,7 @@ import {FooterComponent} from '../admin-dashboard/footer/footer.component';
 
 @Component({
   standalone: true,
-  selector: 'app-user-roles',
+  selector: 'user-roles',
   imports: [SideBarComponent, HeaderComponent, FooterComponent, RouterModule],
   templateUrl: './announcements.component.html'
 })

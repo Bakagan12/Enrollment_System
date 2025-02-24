@@ -1,3 +1,4 @@
+import { group } from 'console';
 import { ContactDetailsComponent } from './views/homePage/contact-details/contact-details.component';
 import { Routes } from '@angular/router';
 import { AuthGuard } from './Guard/auth-guard.guard';
@@ -18,6 +19,12 @@ import { Form1Component } from './views/site/online_registration/highschool_form
 import { Form2Component } from './views/site/online_registration/highschool_form/form2/form2.component';
 import { Form3Component } from './views/site/online_registration/highschool_form/form3/form3.component';
 import { Form4Component } from './views/site/online_registration/highschool_form/form4/form4.component';
+import { DashboardComponent as stundentDashboard } from './views/site/student_portal/dashboard/dashboard.component';
+import { DashboardComponent as GuardianDashboard } from './views/site/guardian_portal/dashboard/dashboard.component';
+import { DashboardComponent as GuidanceDashboard } from './views/site/guidance_portal/dashboard/dashboard.component';
+import { DashboardComponent as ClinicDashboard } from './views/site/clinic_portal/dashboard/dashboard.component';
+import { DashboardComponent as CashierDashboard } from './views/site/cashier_portal/dashboard/dashboard.component';
+import { DashboardComponent as registrarDashboard } from './views/site/registrar_portal/dashboard/dashboard.component';
 
 export const routes: Routes = [
 
@@ -42,13 +49,90 @@ export const routes: Routes = [
   {path: 'online_registration/kidner_elementary/form3', component: Form3Component},
   {path: 'online_registration/kidner_elementary/form4', component: Form4Component},
 
-  //Admin
-  { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
-  { path: 'admin/dashboard/user/role', component: UserRolesComponent, canActivate: [AuthGuard] },
-  { path: 'admin/dashboard/announcements', component: AnnouncementComponent, canActivate: [AuthGuard] },
-  { path: 'admin/dashboard/reports', component: ReportsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'admin',
+    canActivate: [AuthGuard],
+    data:{user_role_id: [1,2]},
+    // data:{roles:[1,2]},
+    children: [
+      { path: 'dashboard', component: AdminDashboardComponent },
+      { path: 'dashboard/user/role', component: UserRolesComponent },
+      { path: 'dashboard/announcements', component: AnnouncementComponent },
+      { path: 'dashboard/reports', component: ReportsComponent },
+    ]
+  },
 
   //Staff
-  { path: 'staff/dashboard', component: StaffDashboardComponent, canActivate: [AuthGuard]},
+  {
+    path: 'staff',
+    canActivate: [AuthGuard],
+    data:{user_role_id: [1]},
+    children:[
+      { path: 'dashboard', component: StaffDashboardComponent},
+    ]},
 
+
+  //Student Potal
+  {
+    path: 'student',
+    canActivate: [AuthGuard],
+    data:{user_role_id: [12]},
+    children:[
+      { path: 'dashboard', component: stundentDashboard},
+    ]
+  },
+
+
+  //Clinics Potal
+  {
+    path: 'clinic',
+    canActivate: [AuthGuard],
+    data:{user_role_id: [11]},
+    children:[
+      { path: 'dashboard', component: ClinicDashboard},
+    ]
+  },
+
+
+  //Registrar Portal
+  {
+    path: 'registrar',
+    canActivate: [AuthGuard],
+    data:{user_role_id: [5,6]},
+    children:[
+      { path: 'dashboard', component: registrarDashboard},
+    ]
+  },
+
+
+  //Guardian Portal
+  {
+    path: 'guardian',
+    canActivate: [AuthGuard],
+    data:{user_role_id: [13]},
+    // data:{roles:[13]},
+    children:[
+      { path: 'dashboard', component: GuardianDashboard, canActivate: [AuthGuard]},
+    ]
+  },
+  //Guardian Portal
+  {
+    path: 'guidance',
+    canActivate: [AuthGuard],
+    data:{user_role_id: [9, 10]},
+    // data:{roles:[13]},
+    children:[
+      { path: 'dashboard', component: GuidanceDashboard, canActivate: [AuthGuard]},
+    ]
+  },
+  //Guardian Portal
+  {
+    path: 'cashier',
+    canActivate: [AuthGuard],
+    data:{user_role_id: [7,8]},
+    // data:{roles:[13]},
+    children:[
+      { path: 'dashboard', component: CashierDashboard, canActivate: [AuthGuard]},
+    ]
+  }
 ];

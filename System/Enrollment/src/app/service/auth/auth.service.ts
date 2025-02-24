@@ -23,10 +23,15 @@ export class AuthService {
           // Store the JWT token and username in localStorage
           localStorage.setItem('auth_token', response.token);
           localStorage.setItem('username', username);
+          localStorage.setItem('user_role_id', response.user_role_id);
 
           // Handle the redirect URL from the backend
-          const redirectUrl = response.redirectUrl || '/homepage';
-          this.router.navigate([redirectUrl]);
+          const redirectUrl = response.redirectUrl || '/auth/login';
+          if (redirectUrl) {
+            this.router.navigate([redirectUrl]);
+          } else {
+            this.router.navigate(['/auth/login']);
+          }
         }
       })
     );
@@ -35,11 +40,15 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('username');
-
+    localStorage.removeItem('user_role_id');
     this.router.navigate(['/auth/login']);
   }
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('auth_token');
+  }
+
+  getUserRole(): string {
+    return localStorage.getItem('user_role_id') || '';
   }
 }
