@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendEmail = void 0;
-// backend/src/services/mailerService.ts
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const emailRepo_1 = require("../../repository/emailRepository/emailRepo"); // Import EmailRepo
 const transporter = nodemailer_1.default.createTransport({
@@ -24,24 +23,84 @@ const transporter = nodemailer_1.default.createTransport({
         pass: process.env.EMAIL_PASS,
     },
 });
-// Function to send email
+// Function to send a new password to the user
 const sendEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // Query the database to get user details by email
         const user = yield emailRepo_1.EmailRepo.find(email);
         if (!user) {
             throw new Error('Email not found in the database');
         }
-        const { username, gen_user_email, password } = user;
-        // Construct the email text and HTML body
-        const subject = 'Your Account Details';
-        const text = `Hello ${gen_user_email}, your username is ${username} and your password is ${password}.`;
-        const html = `<p>Hello ${gen_user_email}, your username is <strong>${username}</strong> and your password is <strong>${password}</strong>.</p>`;
+        const { username, gen_user_email } = user;
+        const subject = 'Your New Account Details';
+        const html = `<!DOCTYPE html>
+                  <html lang="en">
+                  <head>
+                      <meta charset="UTF-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                      <title>Account Reset</title>
+                      <style>
+                          body {
+                              font-family: Arial, sans-serif;
+                              margin: 0;
+                              padding: 0;
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                              height: 100vh;
+                              background-color: #f7f7f7;
+                          }
+                  
+                          .container {
+                              background-color: #f7f7f7;
+                              border-radius: 8px;
+                              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                              width: 90%;
+                              max-width: 600px;
+                              padding: 20px;
+                              text-align: center;
+                          }
+                  
+                          p {
+                              font-size: 16px;
+                              line-height: 1.6;
+                              color: #333;
+                          }
+                  
+                          strong {
+                              color: #007BFF;
+                          }
+                  
+                          .header {
+                              font-size: 20px;
+                              margin-bottom: 20px;
+                              color: #444;
+                          }
+                  
+                          .footer {
+                              margin-top: 20px;
+                              font-size: 14px;
+                              color: #777;
+                          }
+                      </style>
+                  </head>
+                  <body>
+                      <div class="container">
+                          <p class="header">Hello <strong>${gen_user_email}</strong>,</p>
+                          <p>Your account has verified. Your Username is: <strong>${username}</strong> and continue the process to change your password immediately.</p>
+                          <p>Please make sure to change your password as soon as possible.</p>
+                          <div class="footer">
+                              <p>If you did not request this change, please contact support immediately.</p>
+                          </div>
+                      </div>
+                  </body>
+                  </html>
+
+    `;
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: gen_user_email,
             subject: subject,
-            text: text,
+            // text: text,
             html: html,
         };
         // Send the email

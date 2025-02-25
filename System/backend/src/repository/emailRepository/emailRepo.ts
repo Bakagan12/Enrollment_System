@@ -15,8 +15,7 @@ export class EmailRepo{
         try {
           const updatedUser = await db('gen_users')
             .where({ gen_user_email: email })
-            .update({ password: newPassword })
-            .returning('*');
+            .update({ password: newPassword });
           return updatedUser;
         } catch (error) {
           throw new Error('Error updating the password');

@@ -15,7 +15,6 @@ const transporter = nodemailer.createTransport({
 // Function to send a new password to the user
 export const sendEmail = async (email: string): Promise<void> => {
   try {
-    // Query the database to get user details by email
     const user = await EmailRepo.find(email);
 
     if (!user) {
@@ -24,30 +23,77 @@ export const sendEmail = async (email: string): Promise<void> => {
 
     const { username, gen_user_email } = user;
 
-    // Generate a new random password (e.g., 12 characters)
-    const newPassword = crypto.randomBytes(8).toString('hex'); // 16-character password
-
-    // Hash the new password with bcrypt
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-    // Update the user's password in the database with the new hashed password
-    // Assuming you have a method to update the password in the repository
-    await EmailRepo.updatePassword(gen_user_email, hashedPassword);
-
-    // Construct the email text and HTML body
     const subject = 'Your New Account Details';
-    const text = `Hello ${username},\n\nYour account has been reset. Your new password is: ${newPassword}. Please use this to log in.`;
+    const html = `<!DOCTYPE html>
+                  <html lang="en">
+                  <head>
+                      <meta charset="UTF-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                      <title>Account Reset</title>
+                      <style>
+                          body {
+                              font-family: Arial, sans-serif;
+                              margin: 0;
+                              padding: 0;
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                              height: 100vh;
+                              background-color: #f7f7f7;
+                          }
+                  
+                          .container {
+                              background-color: #f7f7f7;
+                              border-radius: 8px;
+                              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                              width: 90%;
+                              max-width: 600px;
+                              padding: 20px;
+                              text-align: center;
+                          }
+                  
+                          p {
+                              font-size: 16px;
+                              line-height: 1.6;
+                              color: #333;
+                          }
+                  
+                          strong {
+                              color: #007BFF;
+                          }
+                  
+                          .header {
+                              font-size: 20px;
+                              margin-bottom: 20px;
+                              color: #444;
+                          }
+                  
+                          .footer {
+                              margin-top: 20px;
+                              font-size: 14px;
+                              color: #777;
+                          }
+                      </style>
+                  </head>
+                  <body>
+                      <div class="container">
+                          <p class="header">Hello <strong>${gen_user_email}</strong>,</p>
+                          <p>Your account has verified. Your Username is: <strong>${username}</strong> and continue the process to change your password immediately.</p>
+                          <p>Please make sure to change your password as soon as possible.</p>
+                          <div class="footer">
+                              <p>If you did not request this change, please contact support immediately.</p>
+                          </div>
+                      </div>
+                  </body>
+                  </html>
 
-    const html = `
-      <p>Hello <strong>${username}</strong>,</p>
-      <p>Your account has been reset. Your new password is: <strong>${newPassword}</strong>. Please use this to log in.</p>
     `;
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: gen_user_email,
       subject: subject,
-      text: text,
+      // text: text,
       html: html,
     };
 

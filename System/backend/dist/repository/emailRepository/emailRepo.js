@@ -27,5 +27,18 @@ class EmailRepo {
             }
         });
     }
+    static updatePassword(email, newPassword) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const updatedUser = yield (0, database_1.default)('gen_users')
+                    .where({ gen_user_email: email })
+                    .update({ password: newPassword });
+                return updatedUser;
+            }
+            catch (error) {
+                throw new Error('Error updating the password');
+            }
+        });
+    }
 }
 exports.EmailRepo = EmailRepo;
