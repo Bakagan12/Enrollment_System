@@ -12,6 +12,6 @@ export class authRepository {
         return db('gen_users').insert({
             username: user.username,
             password: user.password
-        }).returning('*');
+        });
     }
 }
