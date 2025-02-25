@@ -26,6 +26,7 @@ import { DashboardComponent as ClinicDashboard } from './views/site/clinic_porta
 import { DashboardComponent as CashierDashboard } from './views/site/cashier_portal/dashboard/dashboard.component';
 import { DashboardComponent as registrarDashboard } from './views/site/registrar_portal/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './views/site/forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './views/site/forgot-password/change-password/change-password.component';
 
 export const routes: Routes = [
 
@@ -42,6 +43,7 @@ export const routes: Routes = [
 
   //Forgot Password
   {path:'forgot/password', component:ForgotPasswordComponent},
+  {path:'change_password', component:ChangePasswordComponent},
 
 
 
