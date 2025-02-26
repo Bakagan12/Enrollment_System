@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FooterComponent } from '../site_default/footer/footer.component';
 import { HeaderComponent } from '../online_registration/header/header.component';
@@ -8,7 +9,7 @@ import { EmailService } from '../../../service/mailer/email.service';
 @Component({
   standalone: true,
   selector: 'app-forgot-password',
-  imports: [RouterModule, HeaderComponent, FooterComponent, ReactiveFormsModule],
+  imports: [RouterModule, HeaderComponent, FooterComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './forgot-password.component.html',
   styles: []
 })
@@ -24,8 +25,6 @@ export class ForgotPasswordComponent {
     // Initialize form group with form controls and validators
     this.emailForm = this.formBuilder.group({
       recipient: ['', [Validators.required, Validators.email]],  // Email validation
-      subject: ['', Validators.required],  // Subject required validation
-      message: ['', Validators.required],  // Message required validation
     });
   }
 
@@ -33,7 +32,7 @@ export class ForgotPasswordComponent {
   sendEmail() {
     if (this.emailForm.valid) {
       const emailData = this.emailForm.value;
-      console.log('Sending Email:', emailData);  // Replace with actual email sending logic
+      console.log('Sending Email:', emailData);  // This is just for logging
 
       // Call the emailService's sendEmail method
       this.emailService.sendEmail(emailData.recipient).subscribe(

@@ -27,7 +27,7 @@ class authRepository {
             return (0, database_1.default)('gen_users').insert({
                 username: user.username,
                 password: user.password
-            }).returning('*');
+            });
         });
     }
 }
